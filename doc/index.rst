@@ -11,6 +11,7 @@ Nix tutorials
    :caption: Contents:
 
    tutorials/01-nix/using-nix
+   tutorials/02-python/01-using-python-packages
 
 
 Indices and tables

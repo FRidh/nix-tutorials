@@ -54,6 +54,8 @@ html_theme = 'nature'
 html_static_path = ['_static']
 html_extra_path = ['_config.yml']
 
+# Amount of time per cell
+nbsphinx_timeout = 120
 
 # This is processed by Jinja2 and inserted before each notebook
 nbsphinx_prolog = r"""

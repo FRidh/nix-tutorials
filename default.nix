@@ -24,6 +24,7 @@ let
     ]))
     pkgs.nix
     pkgs.pandoc  # Required by nbsphinx...sigh
+    pkgs.gnumake
   ];
 
   devEnv = pkgs.buildEnv {

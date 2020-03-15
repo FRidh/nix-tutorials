@@ -1,1 +1,6 @@
-*.ipynb_checkpoints
+doc/_build
+result*
+
+# TODO: ignore everything but notebooks of interest
+tutorials/*/.ipynb_checkpoints*
+tutorials/*/*.nix

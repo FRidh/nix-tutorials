@@ -10,4 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v8
-    - run: nix-shell --run "make -C doc html"
+    # Check both runtime and development environments build
+    - run: nix-build -A runEnv
+    # Execute notebooks and join them into Sphinx docs
+    - run: nix-shell -A devEnv --run "make -C doc html"

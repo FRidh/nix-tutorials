@@ -27,21 +27,24 @@ let
     pkgs.gnumake
   ];
 
-  devEnv = pkgs.buildEnv {
-    name = "nix-tutorials-env";
-    paths = devDeps;
+  devEnv = pkgs.mkShell {
+    name = "nix-tutorials-dev-env";
+    buildInputs = devDeps;
   };
+
+  runEnv = pkgs.buildEnv {
+    name = "nix-tutorials-run-env";
+    paths = runDeps;
+  };
+
 in pkgs.mkShell {
+  # Make runEnv available for binder.
+  # Do not include devEnv here because of closure size.
   buildInputs = [ 
-    devEnv
+    runEnv
   ];
 
-#   shellHook = ''
-#     ${env}/bin/jupyter-lab
-#   '';
-
-#   passthru = {
-    # inherit execute-notebooks;
-    # inherit container;# tests;
-#   };
+  passthru = {
+    inherit devEnv runEnv;
+  };
 }

@@ -1,0 +1,16 @@
+name: "PR tests"
+on:
+  pull_request:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Nix
+        uses: cachix/install-nix-action@v8
+      - name: Build runtime environment
+        run: nix-build -A runEnv
+      - name: Compose documentation
+        # Execute notebooks and join them into Sphinx docs
+        run: nix-shell -A devEnv --run "make -C doc html"

@@ -1,0 +1,28 @@
+name: "Tests"
+on:
+  push:
+    branches:
+      - master
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Nix
+        uses: cachix/install-nix-action@v8
+      - name: Build runtime environment
+        run: nix-build -A runEnv
+      - name: Compose documentation
+        # Execute notebooks and join them into Sphinx docs
+        run: nix-shell -A devEnv --run "make -C doc html"
+      - name: Install SSH Client
+        uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          SSH: true
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: doc/_build/html # The folder the action should deploy.

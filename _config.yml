@@ -1,0 +1,5 @@
+# Jekyll configuration.
+# By default Jekyll excludes folders prefixed with underscore.
+include:
+  - _static
+  - _sources

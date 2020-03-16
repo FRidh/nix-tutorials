@@ -8,15 +8,17 @@ let
 
   pkgs = import nixpkgs {};
 
+  python = pkgs.python3;
+
   runDeps = [
-    (pkgs.python3.withPackages(ps: with ps; [
+    (python.withPackages(ps: with ps; [
       notebook # Needed for Binder 
     ]))
     pkgs.nix
   ];
 
   devDeps = [
-    (pkgs.python3.withPackages(ps: with ps; [
+    (python.withPackages(ps: with ps; [
       notebook # Needed for Binder 
       jupyterlab # For development
       sphinx # For generating docs

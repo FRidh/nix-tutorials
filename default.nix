@@ -10,6 +10,11 @@ let
 
   python = pkgs.python3;
 
+  pandoc = (import (fetchTarball {
+    url = "https://github.com/Mic92/nur-packages/archive/0c3d7e8545a8f01e72fb79d3f17137267e9c20dc.tar.gz";
+    sha256 = "0c0dg4177kwmgfnpv15sbgd2x1l04bgddw9qnr8qsj4b8dpp945i";
+  }) {inherit pkgs;}).pandoc-bin;  # Much smaller, faster CI
+
   runDeps = [
     (python.withPackages(ps: with ps; [
       notebook # Needed for Binder 
@@ -25,7 +30,7 @@ let
       nbsphinx # For including the notebooks in docs
     ]))
     pkgs.nix
-    pkgs.pandoc  # Required by nbsphinx...sigh
+    pandoc  # Required by nbsphinx...sigh
     pkgs.gnumake
   ];
 

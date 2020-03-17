@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Using Nix &#8212; nix-tutorials  documentation</title>
+    <title>Using the experiment nix command &#8212; nix-tutorials  documentation</title>
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -15,9 +15,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Using Python packages from Nixpkgs" href="../02-python/01-using-python-packages.html" />
-    <link rel="prev" title="Nix tutorials" href="../../index.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -25,12 +23,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../02-python/01-using-python-packages.html" title="Using Python packages from Nixpkgs"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../../index.html" title="Nix tutorials"
-             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials  documentation</a> &#187;</li> 
       </ul>
     </div>  
@@ -240,12 +232,12 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Using-Nix">
-<h1>Using Nix<a class="headerlink" href="#Using-Nix" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial given an introduction to the basic <code class="docutils literal notranslate"><span class="pre">nix-*</span></code> commands.</p>
+<div class="section" id="Using-the-experiment-nix-command">
+<h1>Using the experiment <code class="docutils literal notranslate"><span class="pre">nix</span></code> command<a class="headerlink" href="#Using-the-experiment-nix-command" title="Permalink to this headline">¶</a></h1>
+<p>The previous tutorial showed how to use Nix commands such as <code class="docutils literal notranslate"><span class="pre">nix-build</span></code> and <code class="docutils literal notranslate"><span class="pre">nix-env</span></code>. In this tutorial we’ll use the new but still experimental <code class="docutils literal notranslate"><span class="pre">nix</span></code> command.</p>
 <div class="section" id="Building-with-nix-build">
-<h2>Building with <code class="docutils literal notranslate"><span class="pre">nix-build</span></code><a class="headerlink" href="#Building-with-nix-build" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">nix-build</span></code> command is used for building recipes.</p>
+<h2>Building with <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">build</span></code><a class="headerlink" href="#Building-with-nix-build" title="Permalink to this headline">¶</a></h2>
+<p>Instead of <code class="docutils literal notranslate"><span class="pre">nix-build</span></code> it is now possible to build using <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">build</span></code>. Note that, contrary to <code class="docutils literal notranslate"><span class="pre">nix-build</span></code>, no out-link is created by default.</p>
 <p>In the following example we create a <code class="docutils literal notranslate"><span class="pre">recipe.nix</span></code> file. In this case, our recipe is simple: we fetch the latest version of NixOS 19.09 and build a package from it, <code class="docutils literal notranslate"><span class="pre">hello</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -263,7 +255,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Overwriting recipe.nix
+Writing recipe.nix
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -271,7 +263,7 @@ Overwriting recipe.nix
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> nix-build recipe.nix
+<span></span><span class="o">!</span> nix build -f recipe.nix
 </pre></div>
 </div>
 </div>
@@ -280,16 +272,17 @@ Overwriting recipe.nix
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-/nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10
+[<span class="ansi-green-intense-fg ansi-bold">1</span> copied (<span class="ansi-green-intense-fg ansi-bold">0.2</span> MiB), <span class="ansi-green-intense-fg ansi-bold">13.3</span> MiB DL]
 </pre></div></div>
 </div>
-<p>The store path shows where the build is cached. A symbolic link to that path is also created</p>
+<p>To obtain the path we can explicitly create a out-link</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> ls -l result
+<span></span><span class="o">!</span> nix build -f recipe.nix -o result
+<span class="o">!</span> ls -l result
 </pre></div>
 </div>
 </div>
@@ -320,15 +313,6 @@ Hello, world!
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Managing-channels-with-nix-channel">
-<h2>Managing channels with <code class="docutils literal notranslate"><span class="pre">nix-channel</span></code><a class="headerlink" href="#Managing-channels-with-nix-channel" title="Permalink to this headline">¶</a></h2>
-<p>Nix has the concept of channels. A channel is essentially a location providing Nix expressions. The Nixpkgs project offers various channels.</p>
-<p>We will now install a channel…</p>
-</div>
-<div class="section" id="Installing-with-nix-env">
-<h2>Installing with <code class="docutils literal notranslate"><span class="pre">nix-env</span></code><a class="headerlink" href="#Installing-with-nix-env" title="Permalink to this headline">¶</a></h2>
-<p>Nix has the concept of profiles where users can install packages in. The <code class="docutils literal notranslate"><span class="pre">nix-env</span></code> command is used for installing packages.</p>
-</div>
 </div>
 
 
@@ -339,24 +323,16 @@ Hello, world!
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Using Nix</a><ul>
-<li><a class="reference internal" href="#Building-with-nix-build">Building with <code class="docutils literal notranslate"><span class="pre">nix-build</span></code></a></li>
-<li><a class="reference internal" href="#Managing-channels-with-nix-channel">Managing channels with <code class="docutils literal notranslate"><span class="pre">nix-channel</span></code></a></li>
-<li><a class="reference internal" href="#Installing-with-nix-env">Installing with <code class="docutils literal notranslate"><span class="pre">nix-env</span></code></a></li>
+<li><a class="reference internal" href="#">Using the experiment <code class="docutils literal notranslate"><span class="pre">nix</span></code> command</a><ul>
+<li><a class="reference internal" href="#Building-with-nix-build">Building with <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">build</span></code></a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../../index.html"
-                        title="previous chapter">Nix tutorials</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../02-python/01-using-python-packages.html"
-                        title="next chapter">Using Python packages from Nixpkgs</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/tutorials/01-nix/using-nix.ipynb.txt"
+      <li><a href="../../_sources/tutorials/01-nix/02-using-experimental-nix-command.ipynb.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -382,12 +358,6 @@ Hello, world!
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../02-python/01-using-python-packages.html" title="Using Python packages from Nixpkgs"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../../index.html" title="Nix tutorials"
-             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials  documentation</a> &#187;</li> 
       </ul>
     </div>

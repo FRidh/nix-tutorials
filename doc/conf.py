@@ -73,30 +73,13 @@ nbsphinx_timeout = 120
 
 # This is processed by Jinja2 and inserted before each notebook
 nbsphinx_prolog = r"""
-{% set docname = 'doc/' + env.doc2path(env.docname, base=None) %}
+{% set docname = '' + env.doc2path(env.docname, base=None) %}
 .. raw:: html
 
     <div class="admonition note">
-      <p>This page was generated from
-        <a class="reference external" href="https://github.com/FRidh/nix-tutorials/master/blob/{{ env.config.release|e }}/{{ docname|e }}">{{ docname|e }}</a>.
-        Interactive online version:
-        <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/{{ env.config.release|e }}?filepath={{ docname|e }}"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>.
+      <p>
+        Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/{{ env.config.release|e }}?filepath={{ docname|e }}"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/{{ env.config.release|e }}/{{ docname|e }}">{{ docname|e }}</a>.
       </p>
-      <script>
-        if (document.location.host) {
-          var p = document.currentScript.previousSibling.previousSibling;
-          var a = document.createElement('a');
-          a.innerHTML = 'View in <em>nbviewer</em>';
-          a.href = `https://nbviewer.jupyter.org/url${
-            (window.location.protocol == 'https:' ? 's/' : '/') +
-            window.location.host +
-            window.location.pathname.slice(0, -4) }ipynb`;
-          a.classList.add('reference');
-          a.classList.add('external');
-          p.appendChild(a);
-          p.appendChild(document.createTextNode('.'));
-        }
-      </script>
     </div>
 
 .. raw:: latex

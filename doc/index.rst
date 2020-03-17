@@ -11,7 +11,7 @@ Nix tutorials
    :caption: Contents:
 
    tutorials/01-nix/using-nix
-   tutorials/01-nix/01-using-experimental-nix-command
+   tutorials/01-nix/02-using-experimental-nix-command
    tutorials/02-python/01-using-python-packages
 
 

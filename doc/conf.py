@@ -54,6 +54,20 @@ html_theme = 'nature'
 html_static_path = ['_static']
 html_extra_path = ['_config.yml']
 
+# -- Get version information and date from Git ----------------------------
+
+# Ugly, but because we're running outside of a `nix-build` it is OK-ish...
+try:
+    from subprocess import check_output
+    release = check_output(['git', 'describe', '--tags', '--always'])
+    release = release.decode().strip()
+    today = check_output(['git', 'show', '-s', '--format=%ad', '--date=short'])
+    today = today.decode().strip()
+except Exception:
+    release = '<unknown>'
+    today = '<unknown date>'
+
+
 # Amount of time per cell
 nbsphinx_timeout = 120
 
@@ -61,9 +75,10 @@ nbsphinx_timeout = 120
 nbsphinx_prolog = r"""
 {% set docname = 'doc/' + env.doc2path(env.docname, base=None) %}
 .. raw:: html
+
     <div class="admonition note">
       <p>This page was generated from
-        <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/{{ env.config.release|e }}/{{ docname|e }}">{{ docname|e }}</a>.
+        <a class="reference external" href="https://github.com/FRidh/nix-tutorials/master/blob/{{ env.config.release|e }}/{{ docname|e }}">{{ docname|e }}</a>.
         Interactive online version:
         <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/{{ env.config.release|e }}?filepath={{ docname|e }}"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>.
       </p>
@@ -83,7 +98,9 @@ nbsphinx_prolog = r"""
         }
       </script>
     </div>
+
 .. raw:: latex
+
     \nbsphinxstartnotebook{\scriptsize\noindent\strut
     \textcolor{gray}{The following section was generated from
     \sphinxcode{\sphinxupquote{\strut {{ docname | escape_latex }}}} \dotfill}}

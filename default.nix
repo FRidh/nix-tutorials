@@ -38,6 +38,7 @@ let
       nbsphinx # For including the notebooks in docs
     ]))
     pkgs.nix
+    pkgs.gitMinimal
     pandoc  # Required by nbsphinx...sigh
     pkgs.gnumake
   ];

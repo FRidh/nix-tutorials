@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Using Python packages from Nixpkgs &#8212; nix-tutorials  documentation</title>
+    <title>Using Python packages from Nixpkgs &#8212; nix-tutorials 4f6e7a9 documentation</title>
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../01-nix/02-using-experimental-nix-command.html" title="Using the experiment nix command"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 4f6e7a9 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -236,7 +236,28 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Using-Python-packages-from-Nixpkgs">
+<div class="admonition note">
+  <p>This page was generated from
+    <a class="reference external" href="https://github.com/FRidh/nix-tutorials/master/blob/4f6e7a9/doc/tutorials/02-python/01-using-python-packages.ipynb">doc/tutorials/02-python/01-using-python-packages.ipynb</a>.
+    Interactive online version:
+    <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/4f6e7a9?filepath=doc/tutorials/02-python/01-using-python-packages.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>.
+  </p>
+  <script>
+    if (document.location.host) {
+      var p = document.currentScript.previousSibling.previousSibling;
+      var a = document.createElement('a');
+      a.innerHTML = 'View in <em>nbviewer</em>';
+      a.href = `https://nbviewer.jupyter.org/url${
+        (window.location.protocol == 'https:' ? 's/' : '/') +
+        window.location.host +
+        window.location.pathname.slice(0, -4) }ipynb`;
+      a.classList.add('reference');
+      a.classList.add('external');
+      p.appendChild(a);
+      p.appendChild(document.createTextNode('.'));
+    }
+  </script>
+</div><div class="section" id="Using-Python-packages-from-Nixpkgs">
 <h1>Using Python packages from Nixpkgs<a class="headerlink" href="#Using-Python-packages-from-Nixpkgs" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial will show how to use Python packages from Nixpkgs.</p>
 <div class="section" id="Python-applications,-libraries-and-environments">
@@ -360,8 +381,8 @@ copying path &#39;/nix/store/2kmapvyhr025v3cp3fdpnnz31q42knk7-gnused-4.8&#39; fr
 copying path &#39;/nix/store/ikn472z390jy79qgbfwf6s4xhv2qwfbs-hook&#39; from &#39;https://cache.nixos.org&#39;...
 copying path &#39;/nix/store/jzgjkmm4frpkfga4i17g554fm30x7l2j-hook&#39; from &#39;https://cache.nixos.org&#39;...
 copying path &#39;/nix/store/dbl4vz4s4lf5pjmhk5j7kznrinwsqk4r-libffi-3.3&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/6hhxlbabm7xxdfdw9mbxb8llh63k1bxx-linux-headers-4.19.16&#39; from &#39;https://cache.nixos.org&#39;...
 copying path &#39;/nix/store/8ndsmhgwyvbskafqr8f9qyqfgsncim5d-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/6hhxlbabm7xxdfdw9mbxb8llh63k1bxx-linux-headers-4.19.16&#39; from &#39;https://cache.nixos.org&#39;...
 copying path &#39;/nix/store/dadp9c5fnjx7ipq1d4cp2ivacc5km437-ncurses-6.1-20190112&#39; from &#39;https://cache.nixos.org&#39;...
 copying path &#39;/nix/store/labk3cgvr3zygiamw2452s770j3r030p-patch-2.7.6&#39; from &#39;https://cache.nixos.org&#39;...
 copying path &#39;/nix/store/bq2ycrgyzi3zkq2mwb3j46a684smqxcr-glibc-2.30-dev&#39; from &#39;https://cache.nixos.org&#39;...
@@ -1012,26 +1033,24 @@ running build_ext
 building &#39;mercurial.cext.base85&#39; extension
 building &#39;mercurial.cext.bdiff&#39; extension
 creating build/temp.linux-x86_64-3.7
-creating build/temp.linux-x86_64-3.7
-creating build/temp.linux-x86_64-3.7/mercurial
 creating build/temp.linux-x86_64-3.7/mercurial
 creating build/temp.linux-x86_64-3.7/mercurial/cext
-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/base85.c -o build/temp.linux-x86_64-3.7/mercurial/cext/base85.o
 creating build/temp.linux-x86_64-3.7/mercurial/thirdparty
 creating build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/bdiff.c -o build/temp.linux-x86_64-3.7/mercurial/bdiff.o
-gcc -pthread -shared -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib build/temp.linux-x86_64-3.7/mercurial/cext/base85.o -L/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/lib -lpython3.7m -o build/lib.linux-x86_64-3.7/mercurial/cext/base85.cpython-37m-x86_64-linux-gnu.so
+gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/base85.c -o build/temp.linux-x86_64-3.7/mercurial/cext/base85.o
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/bdiff.c -o build/temp.linux-x86_64-3.7/mercurial/cext/bdiff.o
+gcc -pthread -shared -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib build/temp.linux-x86_64-3.7/mercurial/cext/base85.o -L/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/lib -lpython3.7m -o build/lib.linux-x86_64-3.7/mercurial/cext/base85.cpython-37m-x86_64-linux-gnu.so
 building &#39;mercurial.cext.mpatch&#39; extension
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/mpatch.c -o build/temp.linux-x86_64-3.7/mercurial/mpatch.o
-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/thirdparty/xdiff/xdiffi.c -o build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff/xdiffi.o
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/mpatch.c -o build/temp.linux-x86_64-3.7/mercurial/cext/mpatch.o
+gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/thirdparty/xdiff/xdiffi.c -o build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff/xdiffi.o
 gcc -pthread -shared -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib build/temp.linux-x86_64-3.7/mercurial/mpatch.o build/temp.linux-x86_64-3.7/mercurial/cext/mpatch.o -L/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/lib -lpython3.7m -o build/lib.linux-x86_64-3.7/mercurial/cext/mpatch.cpython-37m-x86_64-linux-gnu.so
 building &#39;mercurial.cext.parsers&#39; extension
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/charencode.c -o build/temp.linux-x86_64-3.7/mercurial/cext/charencode.o
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/thirdparty/xdiff/xprepare.c -o build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff/xprepare.o
-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/thirdparty/xdiff/xutils.c -o build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff/xutils.o
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/dirs.c -o build/temp.linux-x86_64-3.7/mercurial/cext/dirs.o
+gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/thirdparty/xdiff/xutils.c -o build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff/xutils.o
 gcc -pthread -shared -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib build/temp.linux-x86_64-3.7/mercurial/bdiff.o build/temp.linux-x86_64-3.7/mercurial/cext/bdiff.o build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff/xdiffi.o build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff/xprepare.o build/temp.linux-x86_64-3.7/mercurial/thirdparty/xdiff/xutils.o -L/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/lib -lpython3.7m -o build/lib.linux-x86_64-3.7/mercurial/cext/bdiff.cpython-37m-x86_64-linux-gnu.so
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/manifest.c -o build/temp.linux-x86_64-3.7/mercurial/cext/manifest.o
 building &#39;mercurial.cext.osutil&#39; extension
@@ -1041,13 +1060,13 @@ gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imerc
    48 |  return (end) ? (size_t)(end - l-&gt;start) : <span class="ansi-magenta-intense-fg ansi-bold">l-&gt;len</span>;
       |                                            <span class="ansi-magenta-intense-fg ansi-bold">^~~~~~</span>
 gcc -pthread -shared -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib build/temp.linux-x86_64-3.7/mercurial/cext/osutil.o -L/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/lib -lpython3.7m -o build/lib.linux-x86_64-3.7/mercurial/cext/osutil.cpython-37m-x86_64-linux-gnu.so
-gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/parsers.c -o build/temp.linux-x86_64-3.7/mercurial/cext/parsers.o
 building &#39;mercurial.thirdparty.zope.interface._zope_interface_coptimizations&#39; extension
 creating build/temp.linux-x86_64-3.7/mercurial/thirdparty/zope
 creating build/temp.linux-x86_64-3.7/mercurial/thirdparty/zope/interface
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/thirdparty/zope/interface/_zope_interface_coptimizations.c -o build/temp.linux-x86_64-3.7/mercurial/thirdparty/zope/interface/_zope_interface_coptimizations.o
-gcc -pthread -shared -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib build/temp.linux-x86_64-3.7/mercurial/thirdparty/zope/interface/_zope_interface_coptimizations.o -L/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/lib -lpython3.7m -o build/lib.linux-x86_64-3.7/mercurial/thirdparty/zope/interface/_zope_interface_coptimizations.cpython-37m-x86_64-linux-gnu.so
+gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/parsers.c -o build/temp.linux-x86_64-3.7/mercurial/cext/parsers.o
 gcc -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -fPIC -Imercurial -I/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/include/python3.7m -c mercurial/cext/pathencode.c -o build/temp.linux-x86_64-3.7/mercurial/cext/pathencode.o
+gcc -pthread -shared -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-zlib-1.2.11/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-bzip2-1.0.6.0.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-expat-2.2.8/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-xz-5.2.4/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libffi-3.3/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gdbm-1.18.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-sqlite-3.30.1/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-readline-6.3p08/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ncurses-6.1-20190112/lib -L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-openssl-1.1.1d/lib build/temp.linux-x86_64-3.7/mercurial/thirdparty/zope/interface/_zope_interface_coptimizations.o -L/nix/store/n8nviwmllwqv0fjsar8v8k8gjap1vhcw-python3-3.7.6/lib -lpython3.7m -o build/lib.linux-x86_64-3.7/mercurial/thirdparty/zope/interface/_zope_interface_coptimizations.cpython-37m-x86_64-linux-gnu.so
 building &#39;hgext.fsmonitor.pywatchman.bser&#39; extension
 creating build/temp.linux-x86_64-3.7/hgext
 creating build/temp.linux-x86_64-3.7/hgext/fsmonitor
@@ -2553,7 +2572,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
         <li class="right" >
           <a href="../01-nix/02-using-experimental-nix-command.html" title="Using the experiment nix command"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 4f6e7a9 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

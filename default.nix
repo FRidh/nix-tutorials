@@ -23,11 +23,20 @@ let
     sha256 = "0c0dg4177kwmgfnpv15sbgd2x1l04bgddw9qnr8qsj4b8dpp945i";
   }) {inherit pkgs;}).pandoc-bin;  # Much smaller, faster CI
 
+  # Binder runs Nix inside Docker. Sandboxing is not possible.
+  nixConf = (pkgs.runCommand "nix.conf" {} ''
+      mkdir -p $out/etc
+      cat << EOF > $out/etc/nix.conf
+      sandbox = false
+      EOF
+    '');
+
   runDeps = [
     (python.withPackages(ps: with ps; [
       notebook # Needed for Binder 
     ]))
     pkgs.nix
+    nixConf
   ];
 
   devDeps = [
@@ -59,6 +68,9 @@ in pkgs.mkShell {
   buildInputs = [ 
     runEnv
   ];
+
+  # Use a nix.conf file with binder
+  NIX_CONF_DIR="${runEnv}/etc";
 
   passthru = {
     inherit devEnv runEnv;

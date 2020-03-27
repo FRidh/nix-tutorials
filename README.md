@@ -1,4 +1,4 @@
-## Nix tutorials
+# Nix tutorials
 
 ![Tests](https://github.com/FRidh/nix-tutorials/workflows/Tests/badge.svg?branch=master) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/FRidh/nix-tutorials/master)
 
@@ -26,3 +26,10 @@ To build the the run-time environment as used by Binder
 To compose the documentation
 
     nix-shell -A devEnv --run "make -C doc html"
+
+## Contributing tutorials
+
+When contributing a new tutorial
+- add the tutorial add the correct place
+- add a reference in `doc/reference.rst`
+- add a code owner in `.github/CODEOWNERS`

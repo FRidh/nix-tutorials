@@ -6,6 +6,8 @@
 Nix tutorials
 =============
 
+This page links to various Nix tutorials. Each tutorial has a button at the top, allowing you to interactively run the tutorial. This also allows you to try out Nix if you haven't done so already!
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -14,10 +16,3 @@ Nix tutorials
    tutorials/01-nix/02-using-experimental-nix-command
    tutorials/02-python/01-using-python-packages
    tutorials/03-images/01-creating-a-docker-image
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`

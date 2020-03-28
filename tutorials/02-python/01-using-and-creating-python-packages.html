@@ -1,0 +1,652 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Using and creating Python packages &#8212; nix-tutorials 0bc52e9 documentation</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Creating a Docker image" href="../03-images/01-creating-a-docker-image.html" />
+    <link rel="prev" title="Using the experimental nix command" href="../01-nix/02-using-experimental-nix-command.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../03-images/01-creating-a-docker-image.html" title="Creating a Docker image"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../01-nix/02-using-experimental-nix-command.html" title="Using the experimental nix command"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 0bc52e9 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="admonition note">
+  <p>
+    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/0bc52e9?filepath=tutorials/02-python/01-using-and-creating-python-packages.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/0bc52e9/tutorials/02-python/01-using-and-creating-python-packages.ipynb">tutorials/02-python/01-using-and-creating-python-packages.ipynb</a>.
+  </p>
+</div><div class="section" id="Using-and-creating-Python-packages">
+<h1>Using and creating Python packages<a class="headerlink" href="#Using-and-creating-Python-packages" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will show how to use Python packages from Nixpkgs and create new ones. For reference material on Python in Nixpkgs, see the <a class="reference external" href="https://nixos.org/nixpkgs/manual#python">Python section in the Nixpkgs manual</a></p>
+<div class="section" id="Python-interpreters">
+<h2>Python interpreters<a class="headerlink" href="#Python-interpreters" title="Permalink to this headline">¶</a></h2>
+<p>Nixpkgs contains recipes for various Python interpreters. Multiple versions are available of the official reference implementation also known as CPython. Interpreters can be installed into a profile, used as part of a build or used temporary in a <code class="docutils literal notranslate"><span class="pre">nix-shell</span></code> or <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">run</span></code> session.</p>
+</div>
+<div class="section" id="Python-applications,-libraries-and-environments">
+<h2>Python applications, libraries and environments<a class="headerlink" href="#Python-applications,-libraries-and-environments" title="Permalink to this headline">¶</a></h2>
+<p>In Nixpkgs a distinction is made between applications, libraries and environments. - Applications are programs for end-users such as Calibre the e-book manager. - Libraries are packages providing importable modules. Additionally, tools used for development of libraries are also considered libraries. - Environments are a Python interpreter along with libraries, typically used for development or as dependency for other programs.</p>
+</div>
+<div class="section" id="Python-application">
+<h2>Python application<a class="headerlink" href="#Python-application" title="Permalink to this headline">¶</a></h2>
+<p>Let’s consider first a Python application, the version control system Mercurial. The following recipe shows how to build it. For build and run-time dependencies we use the recipes provided by Nixpkgs. We then create a builder function for building our package. Finally, we call it.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%file</span> default.nix
+
+<span class="n">let</span>
+  <span class="n">nixpkgs</span> <span class="o">=</span> <span class="n">fetchTarball</span> <span class="s2">&quot;channel:nixos-20.03&quot;</span><span class="p">;</span>
+  <span class="n">pkgs</span> <span class="o">=</span> <span class="kn">import</span> <span class="nn">nixpkgs</span> <span class="p">{};</span>
+
+  <span class="n">recipe</span> <span class="o">=</span> <span class="p">{</span> <span class="n">python3</span><span class="p">,</span> <span class="n">fetchurl</span> <span class="p">}:</span>
+    <span class="k">with</span> <span class="n">python3</span><span class="o">.</span><span class="n">pkgs</span><span class="p">;</span>
+
+    <span class="n">buildPythonApplication</span> <span class="n">rec</span> <span class="p">{</span>
+      <span class="n">pname</span> <span class="o">=</span> <span class="s2">&quot;mercurial&quot;</span><span class="p">;</span>
+      <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;5.2.2&quot;</span><span class="p">;</span>
+
+      <span class="n">src</span> <span class="o">=</span> <span class="n">fetchurl</span> <span class="p">{</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://mercurial-scm.org/release/mercurial-$</span><span class="si">{version}</span><span class="s2">.tar.gz&quot;</span><span class="p">;</span>
+        <span class="n">sha256</span> <span class="o">=</span> <span class="s2">&quot;0fy00q0k4f0q64jjlnb7cl6m0sglivq9jgdddsp5sywc913zzigz&quot;</span><span class="p">;</span>
+      <span class="p">};</span>
+
+      <span class="c1"># By default tests are executed, but they need to be invoked differently for this package</span>
+      <span class="n">dontUseSetuptoolsCheck</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+    <span class="p">};</span>
+
+<span class="ow">in</span> <span class="n">pkgs</span><span class="o">.</span><span class="n">callPackage</span> <span class="n">recipe</span> <span class="p">{}</span>
+
+</pre></div>
+</div>
+</div>
+<p>Let’s build it. Note we suppress the build-output because of the amount.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> nix-build --no-build-output
+</pre></div>
+</div>
+</div>
+<p>We can now execute <code class="docutils literal notranslate"><span class="pre">hg</span></code> directly from the store path</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> result/bin/hg --version
+</pre></div>
+</div>
+</div>
+<p>or install it in our profile</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> nix-env -if .
+</pre></div>
+</div>
+</div>
+<p>bringing the executable onto <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> hg --version
+</pre></div>
+</div>
+</div>
+<p>Creating a basic recipe for Mercurial was easy. The recipe used in Nixpkgs is however more elaborate.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> nix run -f channel:nixos-20.03 curl --command curl --silent https://raw.githubusercontent.com/NixOS/nixpkgs/nixos-20.03/pkgs/applications/version-management/mercurial/default.nix <span class="p">|</span> pygmentize
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[<span class="ansi-green-intense-fg ansi-bold">6</span> copied (<span class="ansi-green-intense-fg ansi-bold">3.6</span> MiB), <span class="ansi-green-intense-fg ansi-bold">1.1</span> MiB DL]
+{ <span class="ansi-red-fg">stdenv</span>, <span class="ansi-red-fg">fetchurl</span>, <span class="ansi-red-fg">python3Packages</span>, <span class="ansi-red-fg">makeWrapper</span>, <span class="ansi-red-fg">unzip</span>
+, <span class="ansi-red-fg">guiSupport</span> ? <span class="ansi-red-fg">false</span>, <span class="ansi-red-fg">tk</span> ? <span class="ansi-red-fg">null</span>
+, <span class="ansi-red-fg">ApplicationServices</span>
+}:
+
+<span class="ansi-red-fg">let</span>
+  <span class="ansi-red-fg">inherit</span> <span class="ansi-yellow-fg">(</span><span class="ansi-red-fg">python3Packages</span><span class="ansi-yellow-fg">)</span> <span class="ansi-red-fg">docutils</span> <span class="ansi-red-fg">dulwich</span> <span class="ansi-red-fg">python</span><span class="ansi-white-fg">;</span>
+
+<span class="ansi-red-fg">in</span> <span class="ansi-red-fg">python3Packages</span>.<span class="ansi-red-fg">buildPythonApplication</span> <span class="ansi-red-fg">rec</span> {
+  <span class="ansi-red-fg">pname</span> = <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">m</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">c</span><span class="ansi-yellow-fg">u</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">a</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">&#34;</span><span class="ansi-white-fg">;</span>
+  <span class="ansi-red-fg">version</span> = <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">5</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">2</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">2</span><span class="ansi-yellow-fg">&#34;</span><span class="ansi-white-fg">;</span>
+
+  <span class="ansi-red-fg">src</span> = <span class="ansi-red-fg">fetchurl</span> {
+    <span class="ansi-red-fg">url</span> = <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">h</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">p</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">:</span><span class="ansi-yellow-fg">/</span><span class="ansi-yellow-fg">/</span><span class="ansi-yellow-fg">m</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">c</span><span class="ansi-yellow-fg">u</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">a</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">-</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">c</span><span class="ansi-yellow-fg">m</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">o</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">g</span><span class="ansi-yellow-fg">/</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">a</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">/</span><span class="ansi-yellow-fg">m</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">c</span><span class="ansi-yellow-fg">u</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">a</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">-</span><span class="ansi-yellow-fg">$</span><span class="ansi-yellow-fg">{</span><span class="ansi-yellow-fg">v</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">o</span><span class="ansi-yellow-fg">n</span><span class="ansi-yellow-fg">}</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">a</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">g</span><span class="ansi-yellow-fg">z</span><span class="ansi-yellow-fg">&#34;</span><span class="ansi-white-fg">;</span>
+    <span class="ansi-red-fg">sha256</span> = <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">0</span><span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">y</span><span class="ansi-yellow-fg">0</span><span class="ansi-yellow-fg">0</span><span class="ansi-yellow-fg">q</span><span class="ansi-yellow-fg">0</span><span class="ansi-yellow-fg">k</span><span class="ansi-yellow-fg">4</span><span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">0</span><span class="ansi-yellow-fg">q</span><span class="ansi-yellow-fg">6</span><span class="ansi-yellow-fg">4</span><span class="ansi-yellow-fg">j</span><span class="ansi-yellow-fg">j</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">n</span><span class="ansi-yellow-fg">b</span><span class="ansi-yellow-fg">7</span><span class="ansi-yellow-fg">c</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">6</span><span class="ansi-yellow-fg">m</span><span class="ansi-yellow-fg">0</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">g</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">v</span><span class="ansi-yellow-fg">q</span><span class="ansi-yellow-fg">9</span><span class="ansi-yellow-fg">j</span><span class="ansi-yellow-fg">g</span><span class="ansi-yellow-fg">d</span><span class="ansi-yellow-fg">d</span><span class="ansi-yellow-fg">d</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">p</span><span class="ansi-yellow-fg">5</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">y</span><span class="ansi-yellow-fg">w</span><span class="ansi-yellow-fg">c</span><span class="ansi-yellow-fg">9</span><span class="ansi-yellow-fg">1</span><span class="ansi-yellow-fg">3</span><span class="ansi-yellow-fg">z</span><span class="ansi-yellow-fg">z</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">g</span><span class="ansi-yellow-fg">z</span><span class="ansi-yellow-fg">&#34;</span><span class="ansi-white-fg">;</span>
+  }<span class="ansi-white-fg">;</span>
+
+  <span class="ansi-red-fg">format</span> = <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">o</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">h</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">&#34;</span><span class="ansi-white-fg">;</span>
+
+  <span class="ansi-red-fg">inherit</span> <span class="ansi-red-fg">python</span><span class="ansi-white-fg">; # pass it so that the same version can be used in hg2git</span>
+
+  <span class="ansi-red-fg">buildInputs</span> = [ <span class="ansi-red-fg">makeWrapper</span> <span class="ansi-red-fg">docutils</span> <span class="ansi-red-fg">unzip</span> ]
+    ++ <span class="ansi-red-fg">stdenv</span>.<span class="ansi-red-fg">lib</span>.<span class="ansi-red-fg">optionals</span> <span class="ansi-red-fg">stdenv</span>.<span class="ansi-red-fg">isDarwin</span> [ <span class="ansi-red-fg">ApplicationServices</span> ]<span class="ansi-white-fg">;</span>
+
+  <span class="ansi-red-fg">propagatedBuildInputs</span> = [ <span class="ansi-red-fg">dulwich</span> ]<span class="ansi-white-fg">;</span>
+
+  <span class="ansi-red-fg">makeFlags</span> = [ <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">P</span><span class="ansi-yellow-fg">R</span><span class="ansi-yellow-fg">E</span><span class="ansi-yellow-fg">F</span><span class="ansi-yellow-fg">I</span><span class="ansi-yellow-fg">X</span><span class="ansi-yellow-fg">=</span><span class="ansi-yellow-fg">$</span><span class="ansi-yellow-fg">(</span><span class="ansi-yellow-fg">o</span><span class="ansi-yellow-fg">u</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">)</span><span class="ansi-yellow-fg">&#34;</span> ]<span class="ansi-white-fg">;</span>
+
+  <span class="ansi-red-fg">postInstall</span> = <span class="ansi-yellow-fg">(</span><span class="ansi-red-fg">stdenv</span>.<span class="ansi-red-fg">lib</span>.<span class="ansi-red-fg">optionalString</span> <span class="ansi-red-fg">guiSupport</span> <span class="ansi-yellow-fg">&#39;</span><span class="ansi-yellow-fg">&#39;</span>
+    <span class="ansi-red-fg">mkdir</span> -<span class="ansi-red-fg">p</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">etc</span>/<span class="ansi-red-fg">mercurial</span>
+    <span class="ansi-red-fg">cp</span> <span class="ansi-red-fg">contrib</span>/<span class="ansi-red-fg">hgk</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">bin</span>
+    <span class="ansi-red-fg">cat</span> &gt;&gt; $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">etc</span>/<span class="ansi-red-fg">mercurial</span>/<span class="ansi-red-fg">hgrc</span> &lt;&lt; <span class="ansi-red-fg">EOF</span>
+    [<span class="ansi-red-fg">extensions</span>]
+    <span class="ansi-red-fg">hgk</span>=$<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">lib</span>/${<span class="ansi-red-fg">python</span>.<span class="ansi-red-fg">libPrefix</span>}/<span class="ansi-red-fg">site</span>-<span class="ansi-red-fg">packages</span>/<span class="ansi-red-fg">hgext</span>/<span class="ansi-red-fg">hgk</span>.<span class="ansi-red-fg">py</span>
+    <span class="ansi-red-fg">EOF</span>
+    # <span class="ansi-red-fg">setting</span> <span class="ansi-red-fg">HG</span> <span class="ansi-red-fg">so</span> <span class="ansi-red-fg">that</span> <span class="ansi-red-fg">hgk</span> <span class="ansi-red-fg">can</span> <span class="ansi-red-fg">be</span> <span class="ansi-red-fg">run</span> <span class="ansi-red-fg">itself</span> <span class="ansi-red-fg">as</span> <span class="ansi-red-fg">well</span> <span class="ansi-yellow-fg">(</span><span class="ansi-red-fg">not</span> <span class="ansi-red-fg">only</span> <span class="ansi-red-fg">hg</span> <span class="ansi-red-fg">view</span><span class="ansi-yellow-fg">)</span>
+    <span class="ansi-red-fg">WRAP_TK</span>=<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">-</span><span class="ansi-yellow-fg">-</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">T</span><span class="ansi-yellow-fg">K</span><span class="ansi-yellow-fg">_</span><span class="ansi-yellow-fg">L</span><span class="ansi-yellow-fg">I</span><span class="ansi-yellow-fg">B</span><span class="ansi-yellow-fg">R</span><span class="ansi-yellow-fg">A</span><span class="ansi-yellow-fg">R</span><span class="ansi-yellow-fg">Y</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">$</span><span class="ansi-yellow-fg">{</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">k</span><span class="ansi-yellow-fg">}</span><span class="ansi-yellow-fg">/</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">b</span><span class="ansi-yellow-fg">/</span><span class="ansi-yellow-fg">$</span><span class="ansi-yellow-fg">{</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">k</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">b</span><span class="ansi-yellow-fg">P</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">x</span><span class="ansi-yellow-fg">}</span>
+              --<span class="ansi-red-fg">set</span> <span class="ansi-red-fg">HG</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">bin</span>/<span class="ansi-red-fg">hg</span>
+              --<span class="ansi-red-fg">prefix</span> <span class="ansi-red-fg">PATH</span> : ${<span class="ansi-red-fg">tk</span>}/<span class="ansi-red-fg">bin</span> <span class="ansi-yellow-fg">&#34;</span>
+  <span class="ansi-yellow-fg">&#39;</span><span class="ansi-yellow-fg">&#39;</span><span class="ansi-yellow-fg">)</span> + <span class="ansi-yellow-fg">&#39;</span><span class="ansi-yellow-fg">&#39;</span>
+    <span class="ansi-blue-fg">for</span> <span class="ansi-red-fg">i</span> <span class="ansi-red-fg">in</span> $<span class="ansi-yellow-fg">(</span><span class="ansi-red-fg">cd</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">bin</span> &amp;&amp; <span class="ansi-red-fg">ls</span><span class="ansi-yellow-fg">)</span><span class="ansi-white-fg">; do</span>
+      <span class="ansi-red-fg">wrapProgram</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">bin</span>/$<span class="ansi-red-fg">i</span> \
+        $<span class="ansi-red-fg">WRAP_TK</span>
+    <span class="ansi-red-fg">done</span>
+
+    # <span class="ansi-red-fg">copy</span> <span class="ansi-red-fg">hgweb</span>.<span class="ansi-red-fg">cgi</span> <span class="ansi-red-fg">to</span> <span class="ansi-red-fg">allow</span> <span class="ansi-red-fg">use</span> <span class="ansi-red-fg">in</span> <span class="ansi-red-fg">apache</span>
+    <span class="ansi-red-fg">mkdir</span> -<span class="ansi-red-fg">p</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">share</span>/<span class="ansi-red-fg">cgi</span>-<span class="ansi-red-fg">bin</span>
+    <span class="ansi-red-fg">cp</span> -<span class="ansi-red-fg">v</span> <span class="ansi-red-fg">hgweb</span>.<span class="ansi-red-fg">cgi</span> <span class="ansi-red-fg">contrib</span>/<span class="ansi-red-fg">hgweb</span>.<span class="ansi-red-fg">wsgi</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">share</span>/<span class="ansi-red-fg">cgi</span>-<span class="ansi-red-fg">bin</span>
+    <span class="ansi-red-fg">chmod</span> <span class="ansi-red-fg">u</span>+<span class="ansi-red-fg">x</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">share</span>/<span class="ansi-red-fg">cgi</span>-<span class="ansi-red-fg">bin</span>/<span class="ansi-red-fg">hgweb</span>.<span class="ansi-red-fg">cgi</span>
+
+    # <span class="ansi-red-fg">install</span> <span class="ansi-red-fg">bash</span>/<span class="ansi-red-fg">zsh</span> <span class="ansi-red-fg">completions</span>
+    <span class="ansi-red-fg">install</span> -<span class="ansi-red-fg">v</span> -<span class="ansi-red-fg">m644</span> -<span class="ansi-red-fg">D</span> <span class="ansi-red-fg">contrib</span>/<span class="ansi-red-fg">bash_completion</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">share</span>/<span class="ansi-red-fg">bash</span>-<span class="ansi-red-fg">completion</span>/<span class="ansi-red-fg">completions</span>/<span class="ansi-red-fg">_hg</span>
+    <span class="ansi-red-fg">install</span> -<span class="ansi-red-fg">v</span> -<span class="ansi-red-fg">m644</span> -<span class="ansi-red-fg">D</span> <span class="ansi-red-fg">contrib</span>/<span class="ansi-red-fg">zsh_completion</span> $<span class="ansi-red-fg">out</span>/<span class="ansi-red-fg">share</span>/<span class="ansi-red-fg">zsh</span>/<span class="ansi-red-fg">site</span>-<span class="ansi-red-fg">functions</span>/<span class="ansi-red-fg">_hg</span>
+  <span class="ansi-yellow-fg">&#39;</span><span class="ansi-yellow-fg">&#39;</span><span class="ansi-white-fg">;</span>
+
+  <span class="ansi-red-fg">meta</span> = {
+    <span class="ansi-red-fg">inherit</span> <span class="ansi-red-fg">version</span><span class="ansi-white-fg">;</span>
+    <span class="ansi-red-fg">description</span> = <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">A</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">a</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">,</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">g</span><span class="ansi-yellow-fg">h</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">w</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">g</span><span class="ansi-yellow-fg">h</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">S</span><span class="ansi-yellow-fg">C</span><span class="ansi-yellow-fg">M</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">y</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">m</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">o</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">v</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">y</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">l</span><span class="ansi-yellow-fg">a</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">g</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">d</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">i</span><span class="ansi-yellow-fg">b</span><span class="ansi-yellow-fg">u</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">d</span><span class="ansi-yellow-fg"> </span><span class="ansi-yellow-fg">p</span><span class="ansi-yellow-fg">r</span><span class="ansi-yellow-fg">o</span><span class="ansi-yellow-fg">j</span><span class="ansi-yellow-fg">e</span><span class="ansi-yellow-fg">c</span><span class="ansi-yellow-fg">t</span><span class="ansi-yellow-fg">s</span><span class="ansi-yellow-fg">&#34;</span><span class="ansi-white-fg">;</span>
+    <span class="ansi-red-fg">homepage</span> = <span class="ansi-red-fg">https</span>://<span class="ansi-red-fg">www</span>.<span class="ansi-red-fg">mercurial</span>-<span class="ansi-red-fg">scm</span>.<span class="ansi-red-fg">org</span><span class="ansi-white-fg">;</span>
+    <span class="ansi-red-fg">downloadPage</span> = <span class="ansi-red-fg">https</span>://<span class="ansi-red-fg">www</span>.<span class="ansi-red-fg">mercurial</span>-<span class="ansi-red-fg">scm</span>.<span class="ansi-red-fg">org</span>/<span class="ansi-red-fg">release</span>/<span class="ansi-white-fg">;</span>
+    <span class="ansi-red-fg">license</span> = <span class="ansi-red-fg">stdenv</span>.<span class="ansi-red-fg">lib</span>.<span class="ansi-red-fg">licenses</span>.<span class="ansi-red-fg">gpl2</span><span class="ansi-white-fg">;</span>
+    <span class="ansi-red-fg">maintainers</span> = [ <span class="ansi-red-fg">stdenv</span>.<span class="ansi-red-fg">lib</span>.<span class="ansi-red-fg">maintainers</span>.<span class="ansi-red-fg">eelco</span> ]<span class="ansi-white-fg">;</span>
+    <span class="ansi-red-fg">updateWalker</span> = <span class="ansi-red-fg">true</span><span class="ansi-white-fg">;</span>
+    <span class="ansi-red-fg">platforms</span> = <span class="ansi-red-fg">stdenv</span>.<span class="ansi-red-fg">lib</span>.<span class="ansi-red-fg">platforms</span>.<span class="ansi-red-fg">unix</span><span class="ansi-white-fg">;</span>
+  }<span class="ansi-white-fg">;</span>
+}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Python-library">
+<h2>Python library<a class="headerlink" href="#Python-library" title="Permalink to this headline">¶</a></h2>
+<p>Python uses packages to distribute libraries called modules that are importable. In Nixpkgs all Python 3 libraries are in the attribute set <code class="docutils literal notranslate"><span class="pre">python3.pkgs</span></code>. The following example shows a recipe for the Python package <code class="docutils literal notranslate"><span class="pre">toolz</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%file</span> toolz.nix
+
+<span class="p">{</span> <span class="n">lib</span><span class="p">,</span> <span class="n">buildPythonPackage</span><span class="p">,</span> <span class="n">fetchPypi</span> <span class="p">}:</span>
+
+<span class="n">buildPythonPackage</span> <span class="n">rec</span> <span class="p">{</span>
+  <span class="n">pname</span> <span class="o">=</span> <span class="s2">&quot;toolz&quot;</span><span class="p">;</span>
+  <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.10.0&quot;</span><span class="p">;</span>
+
+  <span class="n">src</span> <span class="o">=</span> <span class="n">fetchPypi</span> <span class="p">{</span>
+    <span class="n">inherit</span> <span class="n">pname</span> <span class="n">version</span><span class="p">;</span>
+    <span class="n">sha256</span> <span class="o">=</span> <span class="s2">&quot;08fdd5ef7c96480ad11c12d472de21acd32359996f69a5259299b540feba4560&quot;</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="n">doCheck</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+
+  <span class="n">meta</span> <span class="o">=</span> <span class="k">with</span> <span class="n">lib</span><span class="p">;</span> <span class="p">{</span>
+    <span class="n">homepage</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pytoolz</span><span class="o">/</span><span class="n">toolz</span><span class="p">;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;List processing tools and functional utilities&quot;</span><span class="p">;</span>
+    <span class="n">license</span> <span class="o">=</span> <span class="n">licenses</span><span class="o">.</span><span class="n">bsd3</span><span class="p">;</span>
+    <span class="n">maintainers</span> <span class="o">=</span> <span class="k">with</span> <span class="n">maintainers</span><span class="p">;</span> <span class="p">[</span> <span class="n">fridh</span> <span class="p">];</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Overwriting toolz.nix
+</pre></div></div>
+</div>
+<p>Applications or other libraries may want to use this package. In order to make that possible, we need to update the Python packages set to include this package</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%file</span> mypython.nix
+
+<span class="n">let</span>
+  <span class="n">nixpkgs</span> <span class="o">=</span> <span class="n">fetchTarball</span> <span class="s2">&quot;channel:nixos-20.03&quot;</span><span class="p">;</span>
+  <span class="n">pkgs</span> <span class="o">=</span> <span class="kn">import</span> <span class="nn">nixpkgs</span> <span class="p">{};</span>
+
+  <span class="n">mypython</span> <span class="o">=</span> <span class="n">pkgs</span><span class="o">.</span><span class="n">python3</span><span class="o">.</span><span class="n">override</span> <span class="p">{</span>
+    <span class="bp">self</span> <span class="o">=</span> <span class="n">mypython</span><span class="p">;</span>
+    <span class="n">packageOverrides</span> <span class="o">=</span> <span class="n">pself</span><span class="p">:</span> <span class="n">psuper</span><span class="p">:</span> <span class="p">{</span>
+      <span class="n">toolz</span> <span class="o">=</span> <span class="n">pself</span><span class="o">.</span><span class="n">callPackage</span> <span class="o">./</span><span class="n">toolz</span><span class="o">.</span><span class="n">nix</span> <span class="p">{};</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+<span class="ow">in</span> <span class="p">{</span>
+  <span class="n">inherit</span> <span class="n">mypython</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Writing mypython.nix
+</pre></div></div>
+</div>
+<p>We now have a Python interpreter that has a package set that includes our package. Using this type of overriding we can also inject modifications to existing packages that will then be used by all dependents in the set.</p>
+<p>Let’s build the package.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> nix-build -A mypython.pkgs.toolz mypython.nix
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/nix/store/n49f4v316r19b49lq7r9bj28vngg16ps-python3.7-toolz-0.10.0
+</pre></div></div>
+</div>
+<p>The log shows the execution of several hooks that are responsible for building, installing and testing the package.</p>
+</div>
+<div class="section" id="Environments">
+<h2>Environments<a class="headerlink" href="#Environments" title="Permalink to this headline">¶</a></h2>
+<p>Now that we know how to build a Python library, we want to use it in an environment, for example a development environment.</p>
+<p>The following expression creates a Python environment, quite similar to a <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> or <code class="docutils literal notranslate"><span class="pre">venv</span></code> that includes the interpreter, our package and another package, the test runner <code class="docutils literal notranslate"><span class="pre">pytest</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%file</span> myenv.nix
+
+<span class="p">(</span><span class="kn">import</span> <span class="nn">.</span><span class="o">/</span><span class="n">mypython</span><span class="o">.</span><span class="n">nix</span><span class="p">)</span><span class="o">.</span><span class="n">mypython</span><span class="o">.</span><span class="n">withPackages</span><span class="p">(</span><span class="n">ps</span><span class="p">:</span> <span class="k">with</span> <span class="n">ps</span><span class="p">;</span> <span class="p">[</span> <span class="n">toolz</span> <span class="n">pytest</span> <span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Overwriting myenv.nix
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> nix run -f myenv.nix --command python3 -c <span class="s1">&#39;import toolz; print(toolz); import pytest; print(pytest)&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;module &#39;toolz&#39; from &#39;/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/lib/python3.7/site-packages/toolz/__init__.py&#39;&gt;
+&lt;module &#39;pytest&#39; from &#39;/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/lib/python3.7/site-packages/pytest/__init__.py&#39;&gt;
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">toolz</span></code> module, just like the <code class="docutils literal notranslate"><span class="pre">pytest</span></code> module can now be imported.</p>
+<p>How does an environment like this look like? If we build the expression we get the link to the store path</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> find <span class="k">$(</span>nix-build myenv.nix<span class="k">)</span> <span class="p">|</span> tail
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/python3
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/pydoc
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/pyvenv
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/easy_install-3.7
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/python3-config
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/.easy_install-3.7-wrapped
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/py.test
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/pyvenv-3.7
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/share
+/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/include
+</pre></div></div>
+</div>
+<p>The environment is essentially a bunch of symbolic links to the packages we’ve included, as well as the interpreter. Executables are also wrapped so that all tools can find each other.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using and creating Python packages</a><ul>
+<li><a class="reference internal" href="#Python-interpreters">Python interpreters</a></li>
+<li><a class="reference internal" href="#Python-applications,-libraries-and-environments">Python applications, libraries and environments</a></li>
+<li><a class="reference internal" href="#Python-application">Python application</a></li>
+<li><a class="reference internal" href="#Python-library">Python library</a></li>
+<li><a class="reference internal" href="#Environments">Environments</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../01-nix/02-using-experimental-nix-command.html"
+                        title="previous chapter">Using the experimental <code class="docutils literal notranslate"><span class="pre">nix</span></code> command</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../03-images/01-creating-a-docker-image.html"
+                        title="next chapter">Creating a Docker image</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/tutorials/02-python/01-using-and-creating-python-packages.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../03-images/01-creating-a-docker-image.html" title="Creating a Docker image"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../01-nix/02-using-experimental-nix-command.html" title="Using the experimental nix command"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 0bc52e9 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 1970, Frederik Rietdijk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    </div>
+  </body>
+</html>

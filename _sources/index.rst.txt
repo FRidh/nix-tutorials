@@ -14,5 +14,5 @@ This page links to various Nix tutorials. Each tutorial has a button at the top,
 
    tutorials/01-nix/01-using-nix
    tutorials/01-nix/02-using-experimental-nix-command
-   tutorials/02-python/01-using-python-packages
+   tutorials/02-python/01-using-and-creating-python-packages
    tutorials/03-images/01-creating-a-docker-image

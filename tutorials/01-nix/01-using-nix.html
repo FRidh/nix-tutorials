@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Using Nix &#8212; nix-tutorials 8eb424e documentation</title>
+    <title>Using Nix &#8212; nix-tutorials 70f7d09 documentation</title>
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -31,7 +31,7 @@
         <li class="right" >
           <a href="../../index.html" title="Nix tutorials"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 8eb424e documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 70f7d09 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -242,7 +242,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
   <p>
-    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/8eb424e?filepath=tutorials/01-nix/01-using-nix.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/8eb424e/tutorials/01-nix/01-using-nix.ipynb">tutorials/01-nix/01-using-nix.ipynb</a>.
+    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/70f7d09?filepath=tutorials/01-nix/01-using-nix.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/70f7d09/tutorials/01-nix/01-using-nix.ipynb">tutorials/01-nix/01-using-nix.ipynb</a>.
   </p>
 </div><div class="section" id="Using-Nix">
 <h1>Using Nix<a class="headerlink" href="#Using-Nix" title="Permalink to this headline">¶</a></h1>
@@ -306,7 +306,7 @@ copying path &#39;/nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10&#39; fr
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-lrwxrwxrwx 1 runner docker 54 Mar 28 12:43 result -&gt; /nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10
+lrwxrwxrwx 1 runner docker 54 Mar 28 13:07 result -&gt; /nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10
 </pre></div></div>
 </div>
 <p>We can run the <code class="docutils literal notranslate"><span class="pre">hello</span></code> command that is provided by it</p>
@@ -369,12 +369,34 @@ Hello, world!
 nixos https://github.com/NixOS/nixpkgs-channels/archive/nixos-19.09.tar.gz
 </pre></div></div>
 </div>
+<p>To use the channel, don’t forget to update it. This will fetch the latest Nix expression on the location the channel points to.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> nix-channel --update
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+these derivations will be built:
+  /nix/store/fbmmg1xp3k7ps18b4iyvg5x8crq5il0d-nixos-19.09.drv
+building &#39;/nix/store/fbmmg1xp3k7ps18b4iyvg5x8crq5il0d-nixos-19.09.drv&#39;...
+unpacking channels...
+created 1 symlinks in user environment
+</pre></div></div>
+</div>
 </div>
 <div class="section" id="Installing-with-nix-env">
 <h2>Installing with <code class="docutils literal notranslate"><span class="pre">nix-env</span></code><a class="headerlink" href="#Installing-with-nix-env" title="Permalink to this headline">¶</a></h2>
 <p>Nix has the concept of profiles where users can install packages in. The <code class="docutils literal notranslate"><span class="pre">nix-env</span></code> command is used for installing packages. Users have a default profile, let’s see if anything is installed for the current user</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -384,7 +406,7 @@ nixos https://github.com/NixOS/nixpkgs-channels/archive/nixos-19.09.tar.gz
 </div>
 <p>We can now install <code class="docutils literal notranslate"><span class="pre">hello</span></code> in our profile. That way, the application will remain available. Let’s install it from our <code class="docutils literal notranslate"><span class="pre">recipe.nix</span></code> file.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -404,7 +426,7 @@ created 2 symlinks in user environment
 </div>
 <p>We can now see it is installed</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -422,7 +444,7 @@ hello-2.10
 </div>
 <p>and that we can execute it</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -440,7 +462,7 @@ Hello, world!
 </div>
 <p>We can install the same package but from the channel we configured. Note the package of interest, <code class="docutils literal notranslate"><span class="pre">hello</span></code>, is an attribute of the Nix expression that the channel <code class="docutils literal notranslate"><span class="pre">nixos</span></code> corresponds to</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -453,12 +475,15 @@ Hello, world!
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-intense-fg ansi-bold">error:</span> attribute &#39;nixos&#39; in selection path &#39;nixos.hello&#39; not found
+replacing old &#39;hello-2.10&#39;
+installing &#39;hello-2.10&#39;
+building &#39;/nix/store/102yhjwdr3x5cvccsf44cbp61gmjm0hm-user-environment.drv&#39;...
+created 2 symlinks in user environment
 </pre></div></div>
 </div>
 <p>Instead of installing from a local file, we can also fetch an expression. It’s possible to point to any Nix expression or archive containing Nix expressions.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -480,7 +505,7 @@ created 2 symlinks in user environment
 </div>
 <p>In the example we actually fetched a channel, for which a short-hand notation exists</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -560,7 +585,7 @@ created 2 symlinks in user environment
         <li class="right" >
           <a href="../../index.html" title="Nix tutorials"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 8eb424e documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 70f7d09 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

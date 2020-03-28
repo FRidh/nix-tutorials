@@ -130,6 +130,22 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
+    "To use the channel, don't forget to update it. This will fetch the latest Nix expression on the location the channel points to."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "! nix-channel --update"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
     "## Installing with `nix-env`\n",
     "\n",
     "Nix has the concept of profiles where users can install packages in. The `nix-env` command is used for installing packages. Users have a default profile, let's see if anything is installed for the current user"

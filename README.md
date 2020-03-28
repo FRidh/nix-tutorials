@@ -19,9 +19,9 @@ To open Jupyterlab for writing tutorials
 
     nix-shell -A devEnv --run "jupyter-lab"
 
-To build the the run-time environment as used by Binder
+To build the the run-time dependencies used by Binder
 
-    nix-build -A runEnv
+    nix-build -A runDeps
 
 To compose the documentation
 

@@ -57,22 +57,25 @@ let
     buildInputs = devDeps;
   };
 
-  runEnv = pkgs.buildEnv {
-    name = "nix-tutorials-run-env";
-    paths = runDeps;
+  runEnv = let
+    env = pkgs.buildEnv {
+      name = "nix-tutorials-run-env";
+      paths = runDeps;
+    };
+  in pkgs.mkShell {
+    # Make runEnv available for binder.
+    # Do not include devEnv here because of closure size.
+    #
+    # We use mkShell, not because it runs hooks (we do not want that)
+    # but because we simply need to be able to export an environment variable
+    # which buildEnv doesn't allow.
+    inherit (env) name;
+    buildInputs = [ env ];
+
+    # Use a nix.conf file with binder
+    NIX_CONF_DIR="${env}/etc";
   };
 
-in pkgs.mkShell {
-  # Make runEnv available for binder.
-  # Do not include devEnv here because of closure size.
-  buildInputs = [ 
-    runEnv
-  ];
-
-  # Use a nix.conf file with binder
-  NIX_CONF_DIR="${runEnv}/etc";
-
-  passthru = {
-    inherit devEnv runEnv;
-  };
+in {
+  inherit devDeps runDeps devEnv runEnv pkgs;
 }

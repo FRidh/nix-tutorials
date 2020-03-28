@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Creating a Docker image &#8212; nix-tutorials c5720d2 documentation</title>
+    <title>Using Nix &#8212; nix-tutorials c5720d2 documentation</title>
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -16,7 +16,8 @@
     <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Using Python packages from Nixpkgs" href="../02-python/01-using-python-packages.html" /> 
+    <link rel="next" title="Using the experimental nix command" href="02-using-experimental-nix-command.html" />
+    <link rel="prev" title="Nix tutorials" href="../../index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -25,7 +26,10 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../02-python/01-using-python-packages.html" title="Using Python packages from Nixpkgs"
+          <a href="02-using-experimental-nix-command.html" title="Using the experimental nix command"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../index.html" title="Nix tutorials"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials c5720d2 documentation</a> &#187;</li> 
       </ul>
@@ -238,31 +242,23 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
   <p>
-    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/c5720d2?filepath=tutorials/03-images/01-creating-a-docker-image.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/c5720d2/tutorials/03-images/01-creating-a-docker-image.ipynb">tutorials/03-images/01-creating-a-docker-image.ipynb</a>.
+    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/c5720d2?filepath=tutorials/01-nix/01-using-nix.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/c5720d2/tutorials/01-nix/01-using-nix.ipynb">tutorials/01-nix/01-using-nix.ipynb</a>.
   </p>
-</div><div class="section" id="Creating-a-Docker-image">
-<h1>Creating a Docker image<a class="headerlink" href="#Creating-a-Docker-image" title="Permalink to this headline">¶</a></h1>
-<p>In this tutorial we will create Docker images using Nix and the <code class="docutils literal notranslate"><span class="pre">dockerTools</span></code> functions in Nixpkgs.</p>
-<div class="section" id="Create-a-simple-image">
-<h2>Create a simple image<a class="headerlink" href="#Create-a-simple-image" title="Permalink to this headline">¶</a></h2>
-<p>In the following example we create a Docker image that contains only Python.</p>
+</div><div class="section" id="Using-Nix">
+<h1>Using Nix<a class="headerlink" href="#Using-Nix" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial given an introduction to the basic <code class="docutils literal notranslate"><span class="pre">nix-*</span></code> commands.</p>
+<div class="section" id="Building-with-nix-build">
+<h2>Building with <code class="docutils literal notranslate"><span class="pre">nix-build</span></code><a class="headerlink" href="#Building-with-nix-build" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">nix-build</span></code> command is used for building recipes.</p>
+<p>In the following example we create a <code class="docutils literal notranslate"><span class="pre">recipe.nix</span></code> file. In this case, our recipe is simple: we fetch the latest version of NixOS 19.09 and build a package from it, <code class="docutils literal notranslate"><span class="pre">hello</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%file</span> default.nix
-
-<span class="k">with</span> <span class="kn">import</span> <span class="p">(</span><span class="n">fetchTarball</span> <span class="s2">&quot;channel:nixos-20.03&quot;</span><span class="p">)</span> <span class="p">{};</span>
-
-<span class="n">dockerTools</span><span class="o">.</span><span class="n">buildImage</span> <span class="p">{</span>
-  <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span><span class="p">;</span>
-  <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">Cmd</span> <span class="o">=</span> <span class="p">[</span>
-      <span class="s2">&quot;$</span><span class="si">{python3}</span><span class="s2">/bin/python3 -c &#39;print(</span><span class="se">\&quot;</span><span class="s2">hello</span><span class="se">\&quot;</span><span class="s2">)&#39;&quot;</span>
-    <span class="p">];</span>
-  <span class="p">};</span>
-<span class="p">}</span>
+<span></span><span class="o">%%file</span> recipe.nix
+<span class="k">with</span> <span class="kn">import</span> <span class="p">(</span><span class="n">fetchTarball</span> <span class="s2">&quot;channel:nixos-19.09&quot;</span><span class="p">)</span> <span class="p">{};</span>
+<span class="n">hello</span>
 </pre></div>
 </div>
 </div>
@@ -271,16 +267,15 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Writing default.nix
+Writing recipe.nix
 </pre></div></div>
 </div>
-<p>Let’s build the image.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> nix-build
+<span></span><span class="o">!</span> nix-build recipe.nix
 </pre></div>
 </div>
 </div>
@@ -289,77 +284,20 @@ Writing default.nix
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-these derivations will be built:
-  /nix/store/zg689y7b215rq47nv7h8hijllgdiwnd8-python-config.json.drv
-  /nix/store/4n3mg2xabk6g4yrx2hfais9dyb0h1bkc-docker-layer-python.drv
-  /nix/store/c9q6mpqslv3yvmxp7ngbjvghxcsxfl61-runtime-deps.drv
-  /nix/store/yl9z7fvcag2h38if6p62j357ydwf1i03-docker-image-python.tar.gz.drv
-these paths will be fetched (104.36 MiB download, 416.10 MiB unpacked):
-  /nix/store/0mpmbpxhads74gchcs5nwxsl2im66g9a-tzdata-2019c
-  /nix/store/1icgwanxs0fji5wfcwiz055klxdzkv21-perl5.30.1-Time-Duration-1.21
-  /nix/store/2ihqpk503r2vcspxmdk6ysskz495qhp5-perl5.30.1-IPC-Run-20180523.0
-  /nix/store/5vvl6v6xx1m57pqqqid7bj3wwxlivkmw-perl5.30.1-IO-Tty-1.14
-  /nix/store/6k978g6gdra7waf30gp6dz0x2gxn94af-tarsum
-  /nix/store/aj15fcq84kx6m6i79lwkzkmfsgs5bp3v-jq-1.6-bin
-  /nix/store/b639qg2rwd6p3c1aafnf931mcmbqqdfj-popt-1.16
-  /nix/store/blpjlwsxq75ig38grcyng3j8lizfh291-jshon-20160111.2
-  /nix/store/by17gpjb8jgp0r9p0n93p32sv30y1sm8-perl5.30.1-TimeDate-2.31
-  /nix/store/cdyc50j2xcb6bfnkkvjb2g93f12jx6i8-iana-etc-20190731
-  /nix/store/gsij8yk5rw93q6fmpj4bgc4b750hj5z9-stdenv-linux
-  /nix/store/j5lnql2c0ghyh5236qg19sqs79c00l6w-jansson-2.12
-  /nix/store/jk8bc435svxz6bphy6498jsbh8ykzvn3-moreutils-0.63
-  /nix/store/nx6ya2jqnx8clr7fw7vx0lm3xpfgcmq4-go-1.14
-  /nix/store/p71xbi2g3dr1kwkfvmdwciz3glvjbd5q-jq-1.6-dev
-  /nix/store/r2wvgnr54vmwnjvzyqdixv8xbn362jgh-mailcap-2.1.48
-  /nix/store/rg1vijwrl015222hgjkrflssw6gjf489-pigz-2.4
-  /nix/store/vd27c31vymjihzyag4b7zasd5p0vlwfj-rsync-3.1.3
-  /nix/store/yvmfc6lcsljxb8mdpaz63yl1j0z2zzm2-perl-5.30.1
-  /nix/store/z3db08114x3f6qgrs47p73xxa9da45vl-onig-6.9.4
-  /nix/store/zaxynh86m93783ivsb40v8yq1kg32sm1-jq-1.6-lib
-copying path &#39;/nix/store/1icgwanxs0fji5wfcwiz055klxdzkv21-perl5.30.1-Time-Duration-1.21&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/by17gpjb8jgp0r9p0n93p32sv30y1sm8-perl5.30.1-TimeDate-2.31&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/cdyc50j2xcb6bfnkkvjb2g93f12jx6i8-iana-etc-20190731&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/j5lnql2c0ghyh5236qg19sqs79c00l6w-jansson-2.12&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/r2wvgnr54vmwnjvzyqdixv8xbn362jgh-mailcap-2.1.48&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/blpjlwsxq75ig38grcyng3j8lizfh291-jshon-20160111.2&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/z3db08114x3f6qgrs47p73xxa9da45vl-onig-6.9.4&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/yvmfc6lcsljxb8mdpaz63yl1j0z2zzm2-perl-5.30.1&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/5vvl6v6xx1m57pqqqid7bj3wwxlivkmw-perl5.30.1-IO-Tty-1.14&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/zaxynh86m93783ivsb40v8yq1kg32sm1-jq-1.6-lib&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/2ihqpk503r2vcspxmdk6ysskz495qhp5-perl5.30.1-IPC-Run-20180523.0&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/aj15fcq84kx6m6i79lwkzkmfsgs5bp3v-jq-1.6-bin&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/rg1vijwrl015222hgjkrflssw6gjf489-pigz-2.4&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/p71xbi2g3dr1kwkfvmdwciz3glvjbd5q-jq-1.6-dev&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/b639qg2rwd6p3c1aafnf931mcmbqqdfj-popt-1.16&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/gsij8yk5rw93q6fmpj4bgc4b750hj5z9-stdenv-linux&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/vd27c31vymjihzyag4b7zasd5p0vlwfj-rsync-3.1.3&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/0mpmbpxhads74gchcs5nwxsl2im66g9a-tzdata-2019c&#39; from &#39;https://cache.nixos.org&#39;...
-building &#39;/nix/store/zg689y7b215rq47nv7h8hijllgdiwnd8-python-config.json.drv&#39;...
-copying path &#39;/nix/store/nx6ya2jqnx8clr7fw7vx0lm3xpfgcmq4-go-1.14&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/jk8bc435svxz6bphy6498jsbh8ykzvn3-moreutils-0.63&#39; from &#39;https://cache.nixos.org&#39;...
-copying path &#39;/nix/store/6k978g6gdra7waf30gp6dz0x2gxn94af-tarsum&#39; from &#39;https://cache.nixos.org&#39;...
-building &#39;/nix/store/4n3mg2xabk6g4yrx2hfais9dyb0h1bkc-docker-layer-python.drv&#39;...
-No contents to add to layer.
-Packing layer...
-Computing layer checksum...
-Finished building layer &#39;python&#39;
-building &#39;/nix/store/c9q6mpqslv3yvmxp7ngbjvghxcsxfl61-runtime-deps.drv&#39;...
-building &#39;/nix/store/yl9z7fvcag2h38if6p62j357ydwf1i03-docker-image-python.tar.gz.drv&#39;...
-Adding layer...
-tar: Removing leading `/&#39; from member names
-Adding meta...
-Cooking the image...
-Finished.
-/nix/store/sr39y6b73ym9ma8zjp4dzm6p378wq066-docker-image-python.tar.gz
+unpacking &#39;https://nixos.org/channels/nixos-19.09/nixexprs.tar.xz&#39;...
+these paths will be fetched (0.04 MiB download, 0.20 MiB unpacked):
+  /nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10
+copying path &#39;/nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10&#39; from &#39;https://cache.nixos.org&#39;...
+/nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10
 </pre></div></div>
 </div>
-<p>Now we have our Docker image in the store. Note how small it is</p>
+<p>The store path shows where the build is cached. A symbolic link to that path is also created</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> du -h <span class="k">$(</span>nix-build<span class="k">)</span>
+<span></span><span class="o">!</span> ls -l result
 </pre></div>
 </div>
 </div>
@@ -368,14 +306,36 @@ Finished.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-32M     /nix/store/sr39y6b73ym9ma8zjp4dzm6p378wq066-docker-image-python.tar.gz
+lrwxrwxrwx 1 runner docker 54 Mar 28 12:26 result -&gt; /nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10
 </pre></div></div>
 </div>
-<p>To run the image as a container, just load it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">load</span></code></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docker load &lt; <span class="k">$(</span>nix-build<span class="k">)</span>
+<p>We can run the <code class="docutils literal notranslate"><span class="pre">hello</span></code> command that is provided by it</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<p>It’s not shown here because the Docker daemon is not available.</p>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> result/bin/hello
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Hello, world!
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Managing-channels-with-nix-channel">
+<h2>Managing channels with <code class="docutils literal notranslate"><span class="pre">nix-channel</span></code><a class="headerlink" href="#Managing-channels-with-nix-channel" title="Permalink to this headline">¶</a></h2>
+<p>Nix has the concept of channels. A channel is essentially a location providing Nix expressions. The Nixpkgs project offers various channels.</p>
+<p>We will now install a channel…</p>
+</div>
+<div class="section" id="Installing-with-nix-env">
+<h2>Installing with <code class="docutils literal notranslate"><span class="pre">nix-env</span></code><a class="headerlink" href="#Installing-with-nix-env" title="Permalink to this headline">¶</a></h2>
+<p>Nix has the concept of profiles where users can install packages in. The <code class="docutils literal notranslate"><span class="pre">nix-env</span></code> command is used for installing packages.</p>
 </div>
 </div>
 
@@ -387,19 +347,24 @@ Finished.
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Creating a Docker image</a><ul>
-<li><a class="reference internal" href="#Create-a-simple-image">Create a simple image</a></li>
+<li><a class="reference internal" href="#">Using Nix</a><ul>
+<li><a class="reference internal" href="#Building-with-nix-build">Building with <code class="docutils literal notranslate"><span class="pre">nix-build</span></code></a></li>
+<li><a class="reference internal" href="#Managing-channels-with-nix-channel">Managing channels with <code class="docutils literal notranslate"><span class="pre">nix-channel</span></code></a></li>
+<li><a class="reference internal" href="#Installing-with-nix-env">Installing with <code class="docutils literal notranslate"><span class="pre">nix-env</span></code></a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../02-python/01-using-python-packages.html"
-                        title="previous chapter">Using Python packages from Nixpkgs</a></p>
+  <p class="topless"><a href="../../index.html"
+                        title="previous chapter">Nix tutorials</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="02-using-experimental-nix-command.html"
+                        title="next chapter">Using the experimental <code class="docutils literal notranslate"><span class="pre">nix</span></code> command</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/tutorials/03-images/01-creating-a-docker-image.ipynb.txt"
+      <li><a href="../../_sources/tutorials/01-nix/01-using-nix.ipynb.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -426,7 +391,10 @@ Finished.
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../02-python/01-using-python-packages.html" title="Using Python packages from Nixpkgs"
+          <a href="02-using-experimental-nix-command.html" title="Using the experimental nix command"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../index.html" title="Nix tutorials"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials c5720d2 documentation</a> &#187;</li> 
       </ul>

@@ -10,7 +10,7 @@ Nix tutorials
    :maxdepth: 2
    :caption: Contents:
 
-   tutorials/01-nix/using-nix
+   tutorials/01-nix/01-using-nix
    tutorials/01-nix/02-using-experimental-nix-command
    tutorials/02-python/01-using-python-packages
    tutorials/03-images/01-creating-a-docker-image

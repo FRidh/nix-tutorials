@@ -11,5 +11,5 @@
 
 /tutorials/01-nix/using-nix.ipynb   @FRidh
 /tutorials/01-nix/02-using-experimental-nix-command.ipynb
-/tutorials/02-python/01-using-python-packages.ipynb @FRidh
+/tutorials/02-python/01-using-and-creating-python-packages.ipynb.ipynb @FRidh
 /tutorials/03-images/01-creating-a-docker-image.ipynb   @FRidh

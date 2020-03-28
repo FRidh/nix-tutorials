@@ -13,7 +13,7 @@ Warning: When working on these tutorials, please keep in mind that the notebooks
 
 To open the development environment shell
 
-    nix run -f . devEnv
+    nix-shell -A devEnv
 
 To open Jupyterlab for writing tutorials
 
@@ -21,7 +21,7 @@ To open Jupyterlab for writing tutorials
 
 To build the the run-time environment as used by Binder
 
-    nix build -f . runEnv
+    nix-build -A runEnv
 
 To compose the documentation
 

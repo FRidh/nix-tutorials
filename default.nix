@@ -76,6 +76,45 @@ let
     NIX_CONF_DIR="${env}/etc";
   };
 
+  # Utility that given a filename cleans the notebook of its output.
+  # TODO: broken because of https://github.com/jupyter/nbconvert/issues/822
+  clean-notebook = pkgs.writeShellScriptBin "clean-notebook" ''
+     ${python.pkgs.nbconvert}/bin/jupyter-nbconvert --ClearMetadataPreprocessor.enabled=True --ClearOutput.enabled=True --to=notebook $1
+  '';
+
+  # Validate the notebook purely. In this case, that means testing it does not have any output.
+  # TODO: broken because of https://github.com/jupyter/nbconvert/issues/822
+  test-notebook = pkgs.writeShellScriptBin "test-notebook" ''
+    if [ ! -f "$1" ]; then
+      echo "Error: file $1 does not exist"
+      exit 1
+    fi
+    bname=$(basename -- "$1")
+    fname="''${bname%.*}"
+    dname=$(dirname "$1")
+    echo "Testing notebook $1"
+
+    ${python.pkgs.nbconvert}/bin/jupyter-nbconvert --ClearMetadataPreprocessor.enabled=True --ClearOutput.enabled=True --to=notebook --output="$fname-cleaned.ipynb" "$1"
+    diff "$1" "$dname/$fname-cleaned.ipynb"
+    rm "$dname/$fname-cleaned.ipynb"
+  '';
+
+  # Test all notebooks purely
+  testsPure = pkgs.stdenv.mkDerivation {
+    name = "nix-tutorials-pure-tests";
+    src = fetchGit ./.;
+
+    buildPhase = ''
+      shopt -s globstar
+      for tutorial in tutorials/**/*.ipynb; do
+        ${test-notebook}/bin/test-notebook "$tutorial"
+      done
+    '';
+    installPhase = ''
+      echo success > $out
+    '';
+  };
+
 in {
-  inherit devDeps runDeps devEnv runEnv pkgs;
+  inherit devDeps runDeps devEnv runEnv clean-notebook test-notebook testsPure pkgs;
 }

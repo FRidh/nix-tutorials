@@ -12,6 +12,7 @@ This page links to various Nix tutorials. Each tutorial has a button at the top,
    :maxdepth: 2
    :caption: Contents:
 
+   tutorials/00-intro/01-getting-started
    tutorials/01-nix/01-using-nix
    tutorials/01-nix/02-using-experimental-nix-command
    tutorials/02-python/01-using-and-creating-python-packages

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Using the experimental nix command &#8212; nix-tutorials b3e3b14 documentation</title>
+    <title>Getting started &#8212; nix-tutorials b3e3b14 documentation</title>
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Using and creating Python packages" href="../02-python/01-using-and-creating-python-packages.html" />
-    <link rel="prev" title="Using Nix" href="01-using-nix.html" /> 
+    <link rel="next" title="Using Nix" href="../01-nix/01-using-nix.html" />
+    <link rel="prev" title="Nix tutorials" href="../../index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,10 +26,10 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../02-python/01-using-and-creating-python-packages.html" title="Using and creating Python packages"
+          <a href="../01-nix/01-using-nix.html" title="Using Nix"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="01-using-nix.html" title="Using Nix"
+          <a href="../../index.html" title="Nix tutorials"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials b3e3b14 documentation</a> &#187;</li> 
       </ul>
@@ -242,23 +242,30 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
   <p>
-    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/b3e3b14?filepath=tutorials/01-nix/02-using-experimental-nix-command.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/b3e3b14/tutorials/01-nix/02-using-experimental-nix-command.ipynb">tutorials/01-nix/02-using-experimental-nix-command.ipynb</a>.
+    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/b3e3b14?filepath=tutorials/00-intro/01-getting-started.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/b3e3b14/tutorials/00-intro/01-getting-started.ipynb">tutorials/00-intro/01-getting-started.ipynb</a>.
   </p>
-</div><div class="section" id="Using-the-experimental-nix-command">
-<h1>Using the experimental <code class="docutils literal notranslate"><span class="pre">nix</span></code> command<a class="headerlink" href="#Using-the-experimental-nix-command" title="Permalink to this headline">¶</a></h1>
-<p>The previous tutorial showed how to use Nix commands such as <code class="docutils literal notranslate"><span class="pre">nix-build</span></code> and <code class="docutils literal notranslate"><span class="pre">nix-env</span></code>. In this tutorial we’ll use the new but still experimental <code class="docutils literal notranslate"><span class="pre">nix</span></code> command.</p>
-<div class="section" id="Building-a-package-with-nix-build">
-<h2>Building a package with <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">build</span></code><a class="headerlink" href="#Building-a-package-with-nix-build" title="Permalink to this headline">¶</a></h2>
-<p>Instead of <code class="docutils literal notranslate"><span class="pre">nix-build</span></code> it is now possible to build using <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">build</span></code>. Note that, contrary to <code class="docutils literal notranslate"><span class="pre">nix-build</span></code>, no out-link is created by default.</p>
-<p>In the following example we create a <code class="docutils literal notranslate"><span class="pre">recipe.nix</span></code> file. In this case, our recipe is simple: we fetch the latest version of NixOS 19.09 and build a package from it, <code class="docutils literal notranslate"><span class="pre">hello</span></code>.</p>
+</div><div class="section" id="Getting-started">
+<h1>Getting started<a class="headerlink" href="#Getting-started" title="Permalink to this headline">¶</a></h1>
+<p>This page contains tutorials showing how to use Nix and Nixpkgs. The tutorials were written as <a class="reference external" href="https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html">Jupyter Notebooks</a> so they can be used interactively.</p>
+<p>If you just want to read the tutorials instead of interactively use them, or you are already familiar with Jupyter Notebooks, then you can skip this tutorial and proceed with the actual tutorials regarding Nix and Nixpkgs.</p>
+<div class="section" id="What-is-a-Jupyter-Notebook?">
+<h2>What is a Jupyter Notebook?<a class="headerlink" href="#What-is-a-Jupyter-Notebook?" title="Permalink to this headline">¶</a></h2>
+<p>A Jupyter Notebook is a document that, aside from text and figures can also contain interactive content and code. A notebook consists of cells and each cell has a type, e.g.&nbsp;code or markup. Code cells, when executed, can generate output. The output is recorded in the notebook.</p>
+</div>
+<div class="section" id="How-about-the-static-website?">
+<h2>How about the static website?<a class="headerlink" href="#How-about-the-static-website?" title="Permalink to this headline">¶</a></h2>
+<p>Now, the static website is generated by simply evaluating the notebooks and converting input and output to html. The interactive tutorials on the other hand are actual notebooks that are provisioned using Binder.</p>
+</div>
+<div class="section" id="How-do-I-use-these-tutorials-interactively?">
+<h2>How do I use these tutorials interactively?<a class="headerlink" href="#How-do-I-use-these-tutorials-interactively?" title="Permalink to this headline">¶</a></h2>
+<p>Every tutorial on this page, including this one, has a “launch binder” button at the top. Press it, and after some time (it typically takes 10 seconds or more) a notebook is opened and you see the tutorial, minus output.</p>
+<p>To evaluate a cell, select a cell and press the “Run” button at the top. We can test this with the following cell</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%file</span> recipe.nix
-<span class="k">with</span> <span class="kn">import</span> <span class="p">(</span><span class="n">fetchTarball</span> <span class="s2">&quot;channel:nixos-19.09&quot;</span><span class="p">)</span> <span class="p">{};</span>
-<span class="n">hello</span>
+<span></span><span class="o">!</span> <span class="nb">echo</span> <span class="s2">&quot;hello!&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -267,15 +274,16 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Writing recipe.nix
+hello!
 </pre></div></div>
 </div>
+<p>To evaluate more than one cell, e.g.&nbsp;all the cells, see the “Cell” menu at the top.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> nix build -f recipe.nix
+<span></span><span class="o">!</span> <span class="nb">echo</span> <span class="s2">&quot;One&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -284,17 +292,15 @@ Writing recipe.nix
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[<span class="ansi-green-intense-fg ansi-bold">13.3</span> MiB DL]
+One
 </pre></div></div>
 </div>
-<p>To obtain the path we can explicitly create a out-link</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> nix build -f recipe.nix -o result
-<span class="o">!</span> ls -l result
+<span></span><span class="o">!</span> <span class="nb">echo</span> <span class="s2">&quot;cell&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -303,16 +309,15 @@ Writing recipe.nix
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-lrwxrwxrwx 1 freddy users 54 Mar 28 11:34 result -&gt; /nix/store/4w99qz14nsahk0s798a5rw5l7qk1zwwf-hello-2.10
+cell
 </pre></div></div>
 </div>
-<p>We can run the <code class="docutils literal notranslate"><span class="pre">hello</span></code> command that is provided by it</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> result/bin/hello
+<span></span><span class="o">!</span> <span class="nb">echo</span> <span class="s2">&quot;of&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -321,20 +326,15 @@ lrwxrwxrwx 1 freddy users 54 Mar 28 11:34 result -&gt; /nix/store/4w99qz14nsahk0
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Hello, world!
+of
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Shell-with-specified-packages-with-nix-run">
-<h2>Shell with specified packages with <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">run</span></code><a class="headerlink" href="#Shell-with-specified-packages-with-nix-run" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">run</span></code> command allows you to use a program temporarily; after closing the shell the program is “gone”. Well, not really, it is still in the store but it can be garbage-collected again.</p>
-<p>The following one-liner calls <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">run</span></code>, tells it to use the Nix expressions found at <code class="docutils literal notranslate"><span class="pre">channel-nixos-20.03</span></code>, and then open a shell that has the Python 3 package. We also directly invoke <code class="docutils literal notranslate"><span class="pre">python3</span></code> using <code class="docutils literal notranslate"><span class="pre">--command</span></code> and tell <code class="docutils literal notranslate"><span class="pre">python3</span></code> to print <code class="docutils literal notranslate"><span class="pre">hello</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> nix run --file channel:nixos-20.03 python3 --command python3 -c <span class="s1">&#39;print(&quot;hello!&quot;)&#39;</span>
+<span></span><span class="o">!</span> <span class="nb">echo</span> <span class="s2">&quot;many&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -343,10 +343,17 @@ Hello, world!
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[<span class="ansi-green-intense-fg ansi-bold">13</span> copied (<span class="ansi-green-intense-fg ansi-bold">99.4</span> MiB), <span class="ansi-green-intense-fg ansi-bold">33.2</span> MiB DL]
-hello!
+many
 </pre></div></div>
 </div>
+</div>
+<div class="section" id="My-notebook-hangs,-what-now?">
+<h2>My notebook hangs, what now?<a class="headerlink" href="#My-notebook-hangs,-what-now?" title="Permalink to this headline">¶</a></h2>
+<p>It may happen the notebook hangs, there is no output or something weird is going on. If that’s the case, open the “Kernel” menu and restart the kernel.</p>
+</div>
+<div class="section" id="That’s-it!">
+<h2>That’s it!<a class="headerlink" href="#That’s-it!" title="Permalink to this headline">¶</a></h2>
+<p>Now you know all there is to know about using the tutorials interactively. Good luck!</p>
 </div>
 </div>
 
@@ -358,23 +365,26 @@ hello!
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Using the experimental <code class="docutils literal notranslate"><span class="pre">nix</span></code> command</a><ul>
-<li><a class="reference internal" href="#Building-a-package-with-nix-build">Building a package with <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">build</span></code></a></li>
-<li><a class="reference internal" href="#Shell-with-specified-packages-with-nix-run">Shell with specified packages with <code class="docutils literal notranslate"><span class="pre">nix</span> <span class="pre">run</span></code></a></li>
+<li><a class="reference internal" href="#">Getting started</a><ul>
+<li><a class="reference internal" href="#What-is-a-Jupyter-Notebook?">What is a Jupyter Notebook?</a></li>
+<li><a class="reference internal" href="#How-about-the-static-website?">How about the static website?</a></li>
+<li><a class="reference internal" href="#How-do-I-use-these-tutorials-interactively?">How do I use these tutorials interactively?</a></li>
+<li><a class="reference internal" href="#My-notebook-hangs,-what-now?">My notebook hangs, what now?</a></li>
+<li><a class="reference internal" href="#That’s-it!">That’s it!</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="01-using-nix.html"
-                        title="previous chapter">Using Nix</a></p>
+  <p class="topless"><a href="../../index.html"
+                        title="previous chapter">Nix tutorials</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../02-python/01-using-and-creating-python-packages.html"
-                        title="next chapter">Using and creating Python packages</a></p>
+  <p class="topless"><a href="../01-nix/01-using-nix.html"
+                        title="next chapter">Using Nix</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/tutorials/01-nix/02-using-experimental-nix-command.ipynb.txt"
+      <li><a href="../../_sources/tutorials/00-intro/01-getting-started.ipynb.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -401,10 +411,10 @@ hello!
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../02-python/01-using-and-creating-python-packages.html" title="Using and creating Python packages"
+          <a href="../01-nix/01-using-nix.html" title="Using Nix"
              >next</a> |</li>
         <li class="right" >
-          <a href="01-using-nix.html" title="Using Nix"
+          <a href="../../index.html" title="Nix tutorials"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials b3e3b14 documentation</a> &#187;</li> 
       </ul>

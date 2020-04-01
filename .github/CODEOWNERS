@@ -9,6 +9,7 @@
 
 # Tutorials
 
+/tutorials/00-intro/01-getting-started   @FRidh
 /tutorials/01-nix/using-nix.ipynb   @FRidh
 /tutorials/01-nix/02-using-experimental-nix-command.ipynb
 /tutorials/02-python/01-using-and-creating-python-packages.ipynb.ipynb @FRidh

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Using and creating Python packages &#8212; nix-tutorials b3e3b14 documentation</title>
+    <title>Using and creating Python packages &#8212; nix-tutorials 3c61dbf documentation</title>
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -31,7 +31,7 @@
         <li class="right" >
           <a href="../01-nix/02-using-experimental-nix-command.html" title="Using the experimental nix command"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials b3e3b14 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 3c61dbf documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -242,7 +242,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
   <p>
-    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/b3e3b14?filepath=tutorials/02-python/01-using-and-creating-python-packages.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/b3e3b14/tutorials/02-python/01-using-and-creating-python-packages.ipynb">tutorials/02-python/01-using-and-creating-python-packages.ipynb</a>.
+    Interactive online version <a href="https://mybinder.org/v2/gh/FRidh/nix-tutorials/3c61dbf?filepath=tutorials/02-python/01-using-and-creating-python-packages.ipynb"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a>. Generated from <a class="reference external" href="https://github.com/FRidh/nix-tutorials/blob/3c61dbf/tutorials/02-python/01-using-and-creating-python-packages.ipynb">tutorials/02-python/01-using-and-creating-python-packages.ipynb</a>.
   </p>
 </div><div class="section" id="Using-and-creating-Python-packages">
 <h1>Using and creating Python packages<a class="headerlink" href="#Using-and-creating-Python-packages" title="Permalink to this headline">¶</a></h1>
@@ -258,8 +258,8 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Python-application">
 <h2>Python application<a class="headerlink" href="#Python-application" title="Permalink to this headline">¶</a></h2>
 <p>Let’s consider first a Python application, the version control system Mercurial. The following recipe shows how to build it. For build and run-time dependencies we use the recipes provided by Nixpkgs. We then create a builder function for building our package. Finally, we call it.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -290,9 +290,17 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Writing default.nix
+</pre></div></div>
+</div>
 <p>Let’s build it. Note we suppress the build-output because of the amount.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -300,9 +308,130 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+unpacking &#39;https://nixos.org/channels/nixos-20.03/nixexprs.tar.xz&#39;...
+these derivations will be built:
+  /nix/store/if0ar51j69f690p00bwbvmjn7y3ia27a-mercurial-5.2.2.drv
+these paths will be fetched (73.81 MiB download, 314.71 MiB unpacked):
+  /nix/store/07zg498fp8a3rr3ln2my9rfrlzikmjfm-pcre-8.43
+  /nix/store/1i7hiy0isxixvlv12k1221ff6hzqx51d-hook
+  /nix/store/1zf4cnaaidjajwb4gx4mnkqc5dypkcdy-binutils-2.31.1
+  /nix/store/2a6l66s159lgcfbkyg8zcp7k11bbmv7w-ed-1.15
+  /nix/store/2p6ji9i05dkjz3fgpvymlawl379fw577-glibc-2.30-bin
+  /nix/store/2z51w65pm8vap5j0p2hidyss09cyc8m3-gawk-5.0.1
+  /nix/store/48jg7qxx2i3ndgr1b67imy6qr2nvsfjx-diffutils-3.7
+  /nix/store/4ih4qpvh7ydzw3m5a2q623a6nbp089fp-xz-5.2.4-bin
+  /nix/store/4jm7vhm6shfkl2rs71sb5qg79wwvsj0a-mercurial-5.2.2.tar.gz
+  /nix/store/55b9ip7xkpimaccw9pa0vacy5q94f5xa-python3-3.7.6
+  /nix/store/5gqv9dn7yih5hsz5by9mxhf2384zjsza-gnused-4.8
+  /nix/store/64j3k8hzmdb7k2y06px689gnp61p05qs-attr-2.4.48
+  /nix/store/6hhxlbabm7xxdfdw9mbxb8llh63k1bxx-linux-headers-4.19.16
+  /nix/store/7g6ar24krh7vn66gvfwwv3nq9xsh5c6i-coreutils-8.31
+  /nix/store/9hy6c2hv8lcwc6clnc1p2jf09cs5q9dp-glibc-2.30
+  /nix/store/9y9hgbczizwqzci2vfl2phnk9rz50fiq-glibc-2.30-dev
+  /nix/store/am4jwcz88m2czry78zs00ik66rv8jc83-hook
+  /nix/store/axkkr27z9cjzxac1c9s6ngda73kbz063-binutils-wrapper-2.31.1
+  /nix/store/b4kbdvdyb80r57jhx7665117k75v4jrl-stdenv-linux
+  /nix/store/bdlbkypri7h79m6gnwcp0sq62cj1gvvc-gdbm-1.18.1
+  /nix/store/bnrgs6bk2q3rabkbp9dmw177axh0zz70-setuptools-setup-hook
+  /nix/store/c98k0shcp2yp69g81mqhbqw3xbxvnk0r-gnutar-1.32
+  /nix/store/d5llqjfp8r0984vbmd3sjw53ln3bzpyx-python-catch-conflicts-hook
+  /nix/store/f11b0nnm3sxxh3yw3qam4q0h411i28w7-python3.7-setuptools-44.0.0
+  /nix/store/f6469v8fzabc2is3fssrlj9dm0zja1m3-expat-2.2.8
+  /nix/store/f7dfbkknr2as5vcykilxh840fw9iw3yh-hook
+  /nix/store/h7l1m4lvzvyjxx2d35y4ln1v6sa5ar8g-setuptools-check-hook
+  /nix/store/hdybipp5dymakgkp14z7gnp5da23n0zf-patchelf-0.9
+  /nix/store/hg2mgsivahn1mcjq87l4myv1n6zqa1ii-python3.7-pip-19.3.1
+  /nix/store/ijpx1ns1brdpi3wrcyxaz379q6ns3yp7-pip-install-hook
+  /nix/store/k5r4w2wlsycpqppf3gpda1hyx6sc62i7-gnumake-4.2.1
+  /nix/store/kf2sh7c2fmizvycqq02aad1rfp6xswgv-zlib-1.2.11
+  /nix/store/kpw4kmc74djprg3bjc5rxblij46jdmnf-ncurses-6.1-20190112
+  /nix/store/lfd97pn9bjid6bihs31m9iimi04szrzn-python-imports-check-hook.sh
+  /nix/store/mjvz9b02v42lngkn4dxal6n1xrv8wx9l-gcc-9.2.0
+  /nix/store/n496s4scavyilxmdr3sm662hr6chpzx7-expand-response-params
+  /nix/store/q9488331pamfzi3zy6wn80pnic30b2b9-readline-6.3p08
+  /nix/store/r1hncr91kzyscxiab3c7wlfmvrhx01x6-bzip2-1.0.6.0.1-bin
+  /nix/store/rdl0mdfawd3gyv45nml3n6iw134d2g8h-gnugrep-3.4
+  /nix/store/rj2642fn2ciqwiihvv607n68fiy4qbdc-gzip-1.10
+  /nix/store/rw7mr4n32sacjgd6lvfc91avijdhnlgp-python-remove-bin-bytecode-hook
+  /nix/store/s6gl1w6zvgad0i9arlagdv8dngqmbgi9-python3.7-wheel-0.33.6
+  /nix/store/s7smd0wk3q3y8ns9wmd2r9612a9dbymf-xz-5.2.4
+  /nix/store/smccfl7q9cz2ilzds5rg6f02l41s647p-patch-2.7.6
+  /nix/store/v0mg9kimjd2a6wvmfxdxagzz30l80i1r-acl-2.2.53
+  /nix/store/w7alid4mirzwx3ck4hj18q7rnr4yslfh-gcc-9.2.0-lib
+  /nix/store/w9l2nmg6pclz944f33zg17bpgvq27f4f-findutils-4.7.0
+  /nix/store/wbfvkab46lmihf7ninny4nqzxc0j8rq1-openssl-1.1.1g
+  /nix/store/wz8mnpr8dbbn9kqfq0qa63x47rg4vcik-hook
+  /nix/store/x6sc334nvkl7pr3yqiqs3dzhfsbsgqcd-libffi-3.3
+  /nix/store/x7fr0bvnwvqvr3zg60di9jxvfwimcw7m-bash-4.4-p23
+  /nix/store/xh3bh8nir5d45zk45dz9xxfs2j95cby4-gcc-wrapper-9.2.0
+  /nix/store/xkd8vp4ymb07czc6fap0iyw88qfxwk36-bzip2-1.0.6.0.1
+  /nix/store/yph46cx63plkrj99p5qimggc9hcxjk31-sqlite-3.30.1
+copying path &#39;/nix/store/4jm7vhm6shfkl2rs71sb5qg79wwvsj0a-mercurial-5.2.2.tar.gz&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/rw7mr4n32sacjgd6lvfc91avijdhnlgp-python-remove-bin-bytecode-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/9hy6c2hv8lcwc6clnc1p2jf09cs5q9dp-glibc-2.30&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/am4jwcz88m2czry78zs00ik66rv8jc83-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/6hhxlbabm7xxdfdw9mbxb8llh63k1bxx-linux-headers-4.19.16&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/x7fr0bvnwvqvr3zg60di9jxvfwimcw7m-bash-4.4-p23&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/64j3k8hzmdb7k2y06px689gnp61p05qs-attr-2.4.48&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/xkd8vp4ymb07czc6fap0iyw88qfxwk36-bzip2-1.0.6.0.1&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/v0mg9kimjd2a6wvmfxdxagzz30l80i1r-acl-2.2.53&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/r1hncr91kzyscxiab3c7wlfmvrhx01x6-bzip2-1.0.6.0.1-bin&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/2a6l66s159lgcfbkyg8zcp7k11bbmv7w-ed-1.15&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/7g6ar24krh7vn66gvfwwv3nq9xsh5c6i-coreutils-8.31&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/n496s4scavyilxmdr3sm662hr6chpzx7-expand-response-params&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/f6469v8fzabc2is3fssrlj9dm0zja1m3-expat-2.2.8&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/2z51w65pm8vap5j0p2hidyss09cyc8m3-gawk-5.0.1&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/w7alid4mirzwx3ck4hj18q7rnr4yslfh-gcc-9.2.0-lib&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/48jg7qxx2i3ndgr1b67imy6qr2nvsfjx-diffutils-3.7&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/w9l2nmg6pclz944f33zg17bpgvq27f4f-findutils-4.7.0&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/bdlbkypri7h79m6gnwcp0sq62cj1gvvc-gdbm-1.18.1&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/2p6ji9i05dkjz3fgpvymlawl379fw577-glibc-2.30-bin&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/k5r4w2wlsycpqppf3gpda1hyx6sc62i7-gnumake-4.2.1&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/5gqv9dn7yih5hsz5by9mxhf2384zjsza-gnused-4.8&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/c98k0shcp2yp69g81mqhbqw3xbxvnk0r-gnutar-1.32&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/9y9hgbczizwqzci2vfl2phnk9rz50fiq-glibc-2.30-dev&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/rj2642fn2ciqwiihvv607n68fiy4qbdc-gzip-1.10&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/1i7hiy0isxixvlv12k1221ff6hzqx51d-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/wz8mnpr8dbbn9kqfq0qa63x47rg4vcik-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/x6sc334nvkl7pr3yqiqs3dzhfsbsgqcd-libffi-3.3&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/kpw4kmc74djprg3bjc5rxblij46jdmnf-ncurses-6.1-20190112&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/wbfvkab46lmihf7ninny4nqzxc0j8rq1-openssl-1.1.1g&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/smccfl7q9cz2ilzds5rg6f02l41s647p-patch-2.7.6&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/hdybipp5dymakgkp14z7gnp5da23n0zf-patchelf-0.9&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/07zg498fp8a3rr3ln2my9rfrlzikmjfm-pcre-8.43&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/q9488331pamfzi3zy6wn80pnic30b2b9-readline-6.3p08&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/s7smd0wk3q3y8ns9wmd2r9612a9dbymf-xz-5.2.4&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/rdl0mdfawd3gyv45nml3n6iw134d2g8h-gnugrep-3.4&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/kf2sh7c2fmizvycqq02aad1rfp6xswgv-zlib-1.2.11&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/4ih4qpvh7ydzw3m5a2q623a6nbp089fp-xz-5.2.4-bin&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/mjvz9b02v42lngkn4dxal6n1xrv8wx9l-gcc-9.2.0&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/1zf4cnaaidjajwb4gx4mnkqc5dypkcdy-binutils-2.31.1&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/yph46cx63plkrj99p5qimggc9hcxjk31-sqlite-3.30.1&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/axkkr27z9cjzxac1c9s6ngda73kbz063-binutils-wrapper-2.31.1&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/55b9ip7xkpimaccw9pa0vacy5q94f5xa-python3-3.7.6&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/f7dfbkknr2as5vcykilxh840fw9iw3yh-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/lfd97pn9bjid6bihs31m9iimi04szrzn-python-imports-check-hook.sh&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/hg2mgsivahn1mcjq87l4myv1n6zqa1ii-python3.7-pip-19.3.1&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/f11b0nnm3sxxh3yw3qam4q0h411i28w7-python3.7-setuptools-44.0.0&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/ijpx1ns1brdpi3wrcyxaz379q6ns3yp7-pip-install-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/d5llqjfp8r0984vbmd3sjw53ln3bzpyx-python-catch-conflicts-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/s6gl1w6zvgad0i9arlagdv8dngqmbgi9-python3.7-wheel-0.33.6&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/h7l1m4lvzvyjxx2d35y4ln1v6sa5ar8g-setuptools-check-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/bnrgs6bk2q3rabkbp9dmw177axh0zz70-setuptools-setup-hook&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/xh3bh8nir5d45zk45dz9xxfs2j95cby4-gcc-wrapper-9.2.0&#39; from &#39;https://cache.nixos.org&#39;...
+copying path &#39;/nix/store/b4kbdvdyb80r57jhx7665117k75v4jrl-stdenv-linux&#39; from &#39;https://cache.nixos.org&#39;...
+building &#39;/nix/store/if0ar51j69f690p00bwbvmjn7y3ia27a-mercurial-5.2.2.drv&#39;...
+/nix/store/8fb07c6jw5dfpgcf602d2137jj4dbkr3-mercurial-5.2.2
+</pre></div></div>
+</div>
 <p>We can now execute <code class="docutils literal notranslate"><span class="pre">hg</span></code> directly from the store path</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -310,9 +439,22 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Mercurial Distributed SCM (version 5.2.2)
+(see https://mercurial-scm.org for more information)
+
+Copyright (C) 2005-2019 Matt Mackall and others
+This is free software; see the source for copying conditions. There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</pre></div></div>
+</div>
 <p>or install it in our profile</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -320,9 +462,19 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+installing &#39;mercurial-5.2.2&#39;
+building &#39;/nix/store/825ld4flhfdqzjjwp46bb3hkarsc3gvq-user-environment.drv&#39;...
+created 5 symlinks in user environment
+</pre></div></div>
+</div>
 <p>bringing the executable onto <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -330,9 +482,22 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Mercurial Distributed SCM (version 5.2.2)
+(see https://mercurial-scm.org for more information)
+
+Copyright (C) 2005-2019 Matt Mackall and others
+This is free software; see the source for copying conditions. There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</pre></div></div>
+</div>
 <p>Creating a basic recipe for Mercurial was easy. The recipe used in Nixpkgs is however more elaborate.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -345,7 +510,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[<span class="ansi-green-intense-fg ansi-bold">6</span> copied (<span class="ansi-green-intense-fg ansi-bold">3.6</span> MiB), <span class="ansi-green-intense-fg ansi-bold">1.1</span> MiB DL]
+[<span class="ansi-green-intense-fg ansi-bold">6</span> copied (<span class="ansi-green-intense-fg ansi-bold">3.6</span> MiB), <span class="ansi-green-intense-fg ansi-bold">14.9</span> MiB DL]
 { <span class="ansi-red-fg">stdenv</span>, <span class="ansi-red-fg">fetchurl</span>, <span class="ansi-red-fg">python3Packages</span>, <span class="ansi-red-fg">makeWrapper</span>, <span class="ansi-red-fg">unzip</span>
 , <span class="ansi-red-fg">guiSupport</span> ? <span class="ansi-red-fg">false</span>, <span class="ansi-red-fg">tk</span> ? <span class="ansi-red-fg">null</span>
 , <span class="ansi-red-fg">ApplicationServices</span>
@@ -419,7 +584,7 @@ div.rendered_html tbody tr:hover {
 <h2>Python library<a class="headerlink" href="#Python-library" title="Permalink to this headline">¶</a></h2>
 <p>Python uses packages to distribute libraries called modules that are importable. In Nixpkgs all Python 3 libraries are in the attribute set <code class="docutils literal notranslate"><span class="pre">python3.pkgs</span></code>. The following example shows a recipe for the Python package <code class="docutils literal notranslate"><span class="pre">toolz</span></code></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -453,12 +618,12 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Overwriting toolz.nix
+Writing toolz.nix
 </pre></div></div>
 </div>
 <p>Applications or other libraries may want to use this package. In order to make that possible, we need to update the Python packages set to include this package</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -491,7 +656,7 @@ Writing mypython.nix
 <p>We now have a Python interpreter that has a package set that includes our package. Using this type of overriding we can also inject modifications to existing packages that will then be used by all dependents in the set.</p>
 <p>Let’s build the package.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -504,7 +669,173 @@ Writing mypython.nix
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-/nix/store/n49f4v316r19b49lq7r9bj28vngg16ps-python3.7-toolz-0.10.0
+these derivations will be built:
+  /nix/store/wx2sbziva7jvxa7djsp2ssij1fgmnqvn-python3.7-toolz-0.10.0.drv
+these paths will be fetched (0.05 MiB download, 0.05 MiB unpacked):
+  /nix/store/hx82zf49j1wsy3nlc4g786cjhfbjlyz6-toolz-0.10.0.tar.gz
+copying path &#39;/nix/store/hx82zf49j1wsy3nlc4g786cjhfbjlyz6-toolz-0.10.0.tar.gz&#39; from &#39;https://cache.nixos.org&#39;...
+building &#39;/nix/store/wx2sbziva7jvxa7djsp2ssij1fgmnqvn-python3.7-toolz-0.10.0.drv&#39;...
+Sourcing python-catch-conflicts-hook.sh
+Sourcing python-remove-bin-bytecode-hook.sh
+Sourcing setuptools-build-hook
+Using setuptoolsBuildPhase
+Using setuptoolsShellHook
+Sourcing pip-install-hook
+Using pipInstallPhase
+Sourcing python-imports-check-hook.sh
+Using pythonImportsCheckPhase
+unpacking sources
+unpacking source archive /nix/store/hx82zf49j1wsy3nlc4g786cjhfbjlyz6-toolz-0.10.0.tar.gz
+source root is toolz-0.10.0
+setting SOURCE_DATE_EPOCH to timestamp 1562876547 of file toolz-0.10.0/toolz.egg-info/top_level.txt
+patching sources
+configuring
+no configure script, doing nothing
+building
+Executing setuptoolsBuildPhase
+running bdist_wheel
+running build
+running build_py
+creating build
+creating build/lib
+creating build/lib/toolz
+copying toolz/_signatures.py -&gt; build/lib/toolz
+copying toolz/functoolz.py -&gt; build/lib/toolz
+copying toolz/__init__.py -&gt; build/lib/toolz
+copying toolz/utils.py -&gt; build/lib/toolz
+copying toolz/recipes.py -&gt; build/lib/toolz
+copying toolz/dicttoolz.py -&gt; build/lib/toolz
+copying toolz/compatibility.py -&gt; build/lib/toolz
+copying toolz/itertoolz.py -&gt; build/lib/toolz
+creating build/lib/toolz/sandbox
+copying toolz/sandbox/__init__.py -&gt; build/lib/toolz/sandbox
+copying toolz/sandbox/parallel.py -&gt; build/lib/toolz/sandbox
+copying toolz/sandbox/core.py -&gt; build/lib/toolz/sandbox
+creating build/lib/toolz/curried
+copying toolz/curried/operator.py -&gt; build/lib/toolz/curried
+copying toolz/curried/exceptions.py -&gt; build/lib/toolz/curried
+copying toolz/curried/__init__.py -&gt; build/lib/toolz/curried
+creating build/lib/tlz
+copying tlz/__init__.py -&gt; build/lib/tlz
+copying tlz/_build_tlz.py -&gt; build/lib/tlz
+creating build/lib/toolz/tests
+copying toolz/tests/test_tlz.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_curried.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_inspect_args.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_recipes.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_itertoolz.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_compatibility.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_dicttoolz.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_signatures.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_serialization.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_functoolz.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_curried_doctests.py -&gt; build/lib/toolz/tests
+copying toolz/tests/test_utils.py -&gt; build/lib/toolz/tests
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64
+creating build/bdist.linux-x86_64/wheel
+creating build/bdist.linux-x86_64/wheel/tlz
+copying build/lib/tlz/__init__.py -&gt; build/bdist.linux-x86_64/wheel/tlz
+copying build/lib/tlz/_build_tlz.py -&gt; build/bdist.linux-x86_64/wheel/tlz
+creating build/bdist.linux-x86_64/wheel/toolz
+copying build/lib/toolz/_signatures.py -&gt; build/bdist.linux-x86_64/wheel/toolz
+creating build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_tlz.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_curried.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_inspect_args.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_recipes.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_itertoolz.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_compatibility.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_dicttoolz.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_signatures.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_serialization.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_functoolz.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_curried_doctests.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/tests/test_utils.py -&gt; build/bdist.linux-x86_64/wheel/toolz/tests
+copying build/lib/toolz/functoolz.py -&gt; build/bdist.linux-x86_64/wheel/toolz
+copying build/lib/toolz/__init__.py -&gt; build/bdist.linux-x86_64/wheel/toolz
+copying build/lib/toolz/utils.py -&gt; build/bdist.linux-x86_64/wheel/toolz
+creating build/bdist.linux-x86_64/wheel/toolz/sandbox
+copying build/lib/toolz/sandbox/__init__.py -&gt; build/bdist.linux-x86_64/wheel/toolz/sandbox
+copying build/lib/toolz/sandbox/parallel.py -&gt; build/bdist.linux-x86_64/wheel/toolz/sandbox
+copying build/lib/toolz/sandbox/core.py -&gt; build/bdist.linux-x86_64/wheel/toolz/sandbox
+copying build/lib/toolz/recipes.py -&gt; build/bdist.linux-x86_64/wheel/toolz
+copying build/lib/toolz/dicttoolz.py -&gt; build/bdist.linux-x86_64/wheel/toolz
+creating build/bdist.linux-x86_64/wheel/toolz/curried
+copying build/lib/toolz/curried/operator.py -&gt; build/bdist.linux-x86_64/wheel/toolz/curried
+copying build/lib/toolz/curried/exceptions.py -&gt; build/bdist.linux-x86_64/wheel/toolz/curried
+copying build/lib/toolz/curried/__init__.py -&gt; build/bdist.linux-x86_64/wheel/toolz/curried
+copying build/lib/toolz/compatibility.py -&gt; build/bdist.linux-x86_64/wheel/toolz
+copying build/lib/toolz/itertoolz.py -&gt; build/bdist.linux-x86_64/wheel/toolz
+running install_egg_info
+running egg_info
+writing toolz.egg-info/PKG-INFO
+writing dependency_links to toolz.egg-info/dependency_links.txt
+writing top-level names to toolz.egg-info/top_level.txt
+reading manifest file &#39;toolz.egg-info/SOURCES.txt&#39;
+reading manifest template &#39;MANIFEST.in&#39;
+writing manifest file &#39;toolz.egg-info/SOURCES.txt&#39;
+Copying toolz.egg-info to build/bdist.linux-x86_64/wheel/toolz-0.10.0-py3.7.egg-info
+running install_scripts
+adding license file &#34;LICENSE.txt&#34; (matched pattern &#34;LICEN[CS]E*&#34;)
+creating build/bdist.linux-x86_64/wheel/toolz-0.10.0.dist-info/WHEEL
+creating &#39;dist/toolz-0.10.0-py3-none-any.whl&#39; and adding &#39;build/bdist.linux-x86_64/wheel&#39; to it
+adding &#39;tlz/__init__.py&#39;
+adding &#39;tlz/_build_tlz.py&#39;
+adding &#39;toolz/__init__.py&#39;
+adding &#39;toolz/_signatures.py&#39;
+adding &#39;toolz/compatibility.py&#39;
+adding &#39;toolz/dicttoolz.py&#39;
+adding &#39;toolz/functoolz.py&#39;
+adding &#39;toolz/itertoolz.py&#39;
+adding &#39;toolz/recipes.py&#39;
+adding &#39;toolz/utils.py&#39;
+adding &#39;toolz/curried/__init__.py&#39;
+adding &#39;toolz/curried/exceptions.py&#39;
+adding &#39;toolz/curried/operator.py&#39;
+adding &#39;toolz/sandbox/__init__.py&#39;
+adding &#39;toolz/sandbox/core.py&#39;
+adding &#39;toolz/sandbox/parallel.py&#39;
+adding &#39;toolz/tests/test_compatibility.py&#39;
+adding &#39;toolz/tests/test_curried.py&#39;
+adding &#39;toolz/tests/test_curried_doctests.py&#39;
+adding &#39;toolz/tests/test_dicttoolz.py&#39;
+adding &#39;toolz/tests/test_functoolz.py&#39;
+adding &#39;toolz/tests/test_inspect_args.py&#39;
+adding &#39;toolz/tests/test_itertoolz.py&#39;
+adding &#39;toolz/tests/test_recipes.py&#39;
+adding &#39;toolz/tests/test_serialization.py&#39;
+adding &#39;toolz/tests/test_signatures.py&#39;
+adding &#39;toolz/tests/test_tlz.py&#39;
+adding &#39;toolz/tests/test_utils.py&#39;
+adding &#39;toolz-0.10.0.dist-info/LICENSE.txt&#39;
+adding &#39;toolz-0.10.0.dist-info/METADATA&#39;
+adding &#39;toolz-0.10.0.dist-info/WHEEL&#39;
+adding &#39;toolz-0.10.0.dist-info/top_level.txt&#39;
+adding &#39;toolz-0.10.0.dist-info/RECORD&#39;
+removing build/bdist.linux-x86_64/wheel
+Finished executing setuptoolsBuildPhase
+installing
+Executing pipInstallPhase
+/build/toolz-0.10.0/dist /build/toolz-0.10.0
+Processing ./toolz-0.10.0-py3-none-any.whl
+Installing collected packages: toolz
+Successfully installed toolz-0.10.0
+/build/toolz-0.10.0
+Finished executing pipInstallPhase
+post-installation fixup
+shrinking RPATHs of ELF executables and libraries in /nix/store/c4mw4g3f0gfnxcmpjw37490mgwsbjb87-python3.7-toolz-0.10.0
+strip is /nix/store/1zf4cnaaidjajwb4gx4mnkqc5dypkcdy-binutils-2.31.1/bin/strip
+stripping (with command strip and flags -S) in /nix/store/c4mw4g3f0gfnxcmpjw37490mgwsbjb87-python3.7-toolz-0.10.0/lib
+patching script interpreter paths in /nix/store/c4mw4g3f0gfnxcmpjw37490mgwsbjb87-python3.7-toolz-0.10.0
+checking for references to /build/ in /nix/store/c4mw4g3f0gfnxcmpjw37490mgwsbjb87-python3.7-toolz-0.10.0...
+pythonCatchConflictsPhase
+pythonRemoveBinBytecodePhase
+pythonImportsCheckPhase
+Executing pythonImportsCheckPhase
+/nix/store/c4mw4g3f0gfnxcmpjw37490mgwsbjb87-python3.7-toolz-0.10.0
 </pre></div></div>
 </div>
 <p>The log shows the execution of several hooks that are responsible for building, installing and testing the package.</p>
@@ -514,7 +845,7 @@ Writing mypython.nix
 <p>Now that we know how to build a Python library, we want to use it in an environment, for example a development environment.</p>
 <p>The following expression creates a Python environment, quite similar to a <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> or <code class="docutils literal notranslate"><span class="pre">venv</span></code> that includes the interpreter, our package and another package, the test runner <code class="docutils literal notranslate"><span class="pre">pytest</span></code></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -529,11 +860,11 @@ Writing mypython.nix
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Overwriting myenv.nix
+Writing myenv.nix
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -546,14 +877,15 @@ Overwriting myenv.nix
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;module &#39;toolz&#39; from &#39;/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/lib/python3.7/site-packages/toolz/__init__.py&#39;&gt;
-&lt;module &#39;pytest&#39; from &#39;/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/lib/python3.7/site-packages/pytest/__init__.py&#39;&gt;
+[<span class="ansi-green-intense-fg ansi-bold">2</span> built, <span class="ansi-green-intense-fg ansi-bold">14</span> copied (<span class="ansi-green-intense-fg ansi-bold">54.8</span> MiB), <span class="ansi-green-intense-fg ansi-bold">8.9</span> MiB DL]
+&lt;module &#39;toolz&#39; from &#39;/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/site-packages/toolz/__init__.py&#39;&gt;
+&lt;module &#39;pytest&#39; from &#39;/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/site-packages/pytest/__init__.py&#39;&gt;
 </pre></div></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">toolz</span></code> module, just like the <code class="docutils literal notranslate"><span class="pre">pytest</span></code> module can now be imported.</p>
 <p>How does an environment like this look like? If we build the expression we get the link to the store path</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -566,16 +898,16 @@ Overwriting myenv.nix
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/python3
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/pydoc
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/pyvenv
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/easy_install-3.7
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/python3-config
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/.easy_install-3.7-wrapped
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/py.test
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/bin/pyvenv-3.7
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/share
-/nix/store/dyzd76278jccx0ywmp77cr70s3m73413-python3-3.7.6-env/include
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/binhex.py
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/xdrlib.py
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/shelve.py
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/macpath.py
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/_collections_abc.py
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/io.py
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/python3.7/bisect.py
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/libpython3.7m.so
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/libpython3.7m.so.1.0
+/nix/store/gwzvpcfzd4r66lh19lkgqvnav1v8d0a7-python3-3.7.6-env/lib/libpython3.so
 </pre></div></div>
 </div>
 <p>The environment is essentially a bunch of symbolic links to the packages we’ve included, as well as the interpreter. Executables are also wrapped so that all tools can find each other.</p>
@@ -641,7 +973,7 @@ Overwriting myenv.nix
         <li class="right" >
           <a href="../01-nix/02-using-experimental-nix-command.html" title="Using the experimental nix command"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials b3e3b14 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">nix-tutorials 3c61dbf documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
